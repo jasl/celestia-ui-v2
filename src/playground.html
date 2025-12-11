@@ -12,18 +12,18 @@
 
 <body class="h-dvh overflow-hidden bg-base-100" data-controller="playground">
   <!-- Main Layout: Nested Drawers for Left and Right panels -->
-  <div class="drawer lg:drawer-open h-full" data-controller="drawer" data-drawer-id-value="left-drawer">
+  <div class="drawer lg:drawer-open h-full min-h-0" data-controller="drawer" data-drawer-id-value="left-drawer">
     <input id="left-drawer" type="checkbox" class="drawer-toggle" data-drawer-target="toggle" data-action="change->drawer#handleChange">
     
     <!-- Main Content Area (includes right drawer) -->
-    <div class="drawer-content flex flex-col h-full">
+    <div class="drawer-content flex flex-col h-full min-h-0 overflow-hidden">
       
       <!-- Right Drawer wrapper -->
-      <div class="drawer drawer-end xl:drawer-open h-full" data-controller="drawer" data-drawer-id-value="right-drawer">
+      <div class="drawer drawer-end xl:drawer-open h-full min-h-0" data-controller="drawer" data-drawer-id-value="right-drawer">
         <input id="right-drawer" type="checkbox" class="drawer-toggle" data-drawer-target="toggle" data-action="change->drawer#handleChange">
         
         <!-- Center Content -->
-        <div class="drawer-content flex flex-col h-full">
+        <div class="drawer-content flex flex-col h-full min-h-0 overflow-hidden">
           
           <!-- Top Navbar -->
           <header class="navbar h-14 min-h-14 px-2 md:px-4 bg-base-100/80 backdrop-blur-md border-b border-base-300/40 shrink-0 relative z-[100]">
@@ -122,9 +122,9 @@
           </header>
 
           <!-- Chat Area -->
-          <main class="flex-1 flex flex-col overflow-hidden relative z-0">
+          <main class="flex-1 flex flex-col min-h-0 overflow-hidden relative z-0">
             <!-- Messages -->
-            <div class="flex-1 overflow-y-auto px-3 md:px-6 py-4 space-y-4" data-playground-target="messages">
+            <div class="flex-1 overflow-y-auto min-h-0 px-3 md:px-6 py-4 space-y-4" data-playground-target="messages">
               <!-- System message -->
               <div class="flex justify-center">
                 <div class="badge badge-ghost gap-1 text-xs">
