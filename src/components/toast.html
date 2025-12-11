@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="celestia-dawn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toast Component Demo</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../assets/application.css">
+</head>
+
+<body class="min-h-screen bg-base-200 p-8">
+    <!-- Toast Container - Server rendered toasts will be placed here -->
+    <div id="toast-container">
+        <!-- Example: Server-side rendered toast (will show on page load) -->
+        <div data-controller="toast" 
+             data-toast-duration-value="5000"
+             data-toast-auto-dismiss-value="true"
+             data-toast-pause-on-hover-value="true">
+            <div class="toast toast-top toast-end z-50">
+                    <div class="alert alert-success shadow-lg relative overflow-hidden!" data-toast-target="alert">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="size-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <div class="flex flex-col gap-1">
+                                <span class="font-semibold">登录成功！</span>
+                                <span class="text-xs opacity-80">欢迎回来，用户</span>
+                            </div>
+                            <button type="button" data-action="toast#dismiss" class="btn btn-ghost btn-sm btn-circle">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                            <!-- Progress bar -->
+                            <div class="absolute bottom-0 inset-x-0 h-1 bg-success/30 rounded-b-box">
+                                <div data-toast-target="progress" class="h-full bg-success-content/50 transition-all duration-100 ease-linear rounded-b-box" style="width: 100%"></div>
+                            </div>
+                        </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-4xl mx-auto">
+        <div class="card bg-base-100 shadow-xl">
+            <div class="card-body">
+                <h1 class="card-title text-2xl mb-6">Toast 组件演示</h1>
+                
+                <p class="text-base-content/70 mb-6">
+                    Toast 组件支持服务器端渲染，后端可以在 HTML 中直接嵌入 Toast 内容，页面加载后自动显示并倒计时消失。
+                    鼠标悬停时会暂停倒计时。
+                </p>
+
+                <!-- Toast Type Examples -->
+                <div class="divider">点击按钮触发不同类型的 Toast</div>
+                
+                <div class="flex flex-wrap gap-4 mb-8">
+                    <button class="btn btn-success" onclick="showToast('success', '操作成功', '您的更改已保存')">
+                        成功提示
+                    </button>
+                    <button class="btn btn-info" onclick="showToast('info', '提示信息', '您有3条新消息')">
+                        信息提示
+                    </button>
+                    <button class="btn btn-warning" onclick="showToast('warning', '警告提示', '您的会话即将过期')">
+                        警告提示
+                    </button>
+                    <button class="btn btn-error" onclick="showToast('error', '错误提示', '操作失败，请重试')">
+                        错误提示
+                    </button>
+                </div>
+
+                <!-- Configuration Options -->
+                <div class="divider">配置选项</div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">显示时长 (毫秒)</span>
+                        </label>
+                        <input type="number" id="duration" value="5000" min="1000" max="30000" step="1000" class="input input-bordered">
+                    </div>
+                    
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">位置</span>
+                        </label>
+                        <select id="position" class="select select-bordered">
+                            <option value="toast-top toast-end" selected>右上角</option>
+                            <option value="toast-top toast-start">左上角</option>
+                            <option value="toast-top toast-center">顶部居中</option>
+                            <option value="toast-bottom toast-end">右下角</option>
+                            <option value="toast-bottom toast-start">左下角</option>
+                            <option value="toast-bottom toast-center">底部居中</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-control mt-4">
+                    <label class="label cursor-pointer justify-start gap-4">
+                        <input type="checkbox" id="autoDismiss" checked class="checkbox checkbox-primary">
+                        <span class="label-text">自动消失</span>
+                    </label>
+                </div>
+
+                <div class="form-control">
+                    <label class="label cursor-pointer justify-start gap-4">
+                        <input type="checkbox" id="pauseOnHover" checked class="checkbox checkbox-primary">
+                        <span class="label-text">悬停时暂停</span>
+                    </label>
+                </div>
+
+                <div class="form-control">
+                    <label class="label cursor-pointer justify-start gap-4">
+                        <input type="checkbox" id="showProgress" checked class="checkbox checkbox-primary">
+                        <span class="label-text">显示进度条</span>
+                    </label>
+                </div>
+
+                <button class="btn btn-primary mt-6" onclick="showCustomToast()">
+                    使用自定义配置显示 Toast
+                </button>
+
+                <!-- Server-side Rendering Example -->
+                <div class="divider">服务端渲染示例代码</div>
+                
+                <div class="mockup-code text-sm">
+                    <pre data-prefix="1"><code>&lt;!-- 后端模板渲染示例 (如 Jinja2, ERB 等) --&gt;</code></pre>
+                    <pre data-prefix="2"><code>&lt;div data-controller="toast"</code></pre>
+                    <pre data-prefix="3"><code>     data-toast-duration-value="5000"</code></pre>
+                    <pre data-prefix="4"><code>     data-toast-auto-dismiss-value="true"&gt;</code></pre>
+                    <pre data-prefix="5"><code>  &lt;div class="toast toast-top toast-end z-50"&gt;</code></pre>
+                    <pre data-prefix="6"><code>    &lt;div class="alert alert-success"&gt;</code></pre>
+                    <pre data-prefix="7"><code>      &lt;span&gt;{{ message }}&lt;/span&gt;</code></pre>
+                    <pre data-prefix="8"><code>      &lt;button data-action="toast#dismiss"&gt;✕&lt;/button&gt;</code></pre>
+                    <pre data-prefix="9"><code>    &lt;/div&gt;</code></pre>
+                    <pre data-prefix="10"><code>  &lt;/div&gt;</code></pre>
+                    <pre data-prefix="11"><code>&lt;/div&gt;</code></pre>
+                </div>
+
+                <!-- API Reference -->
+                <div class="divider">API 参考</div>
+                
+                <div class="overflow-x-auto">
+                    <table class="table table-zebra">
+                        <thead>
+                            <tr>
+                                <th>属性</th>
+                                <th>类型</th>
+                                <th>默认值</th>
+                                <th>说明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code class="text-primary">data-toast-duration-value</code></td>
+                                <td>Number</td>
+                                <td>5000</td>
+                                <td>显示时长（毫秒）</td>
+                            </tr>
+                            <tr>
+                                <td><code class="text-primary">data-toast-auto-dismiss-value</code></td>
+                                <td>Boolean</td>
+                                <td>true</td>
+                                <td>是否自动消失</td>
+                            </tr>
+                            <tr>
+                                <td><code class="text-primary">data-toast-pause-on-hover-value</code></td>
+                                <td>Boolean</td>
+                                <td>true</td>
+                                <td>悬停时是否暂停倒计时</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="overflow-x-auto mt-4">
+                    <table class="table table-zebra">
+                        <thead>
+                            <tr>
+                                <th>Target</th>
+                                <th>说明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code class="text-primary">data-toast-target="alert"</code></td>
+                                <td>Alert 容器元素</td>
+                            </tr>
+                            <tr>
+                                <td><code class="text-primary">data-toast-target="progress"</code></td>
+                                <td>进度条元素（可选）</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="overflow-x-auto mt-4">
+                    <table class="table table-zebra">
+                        <thead>
+                            <tr>
+                                <th>Action</th>
+                                <th>说明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code class="text-primary">data-action="toast#dismiss"</code></td>
+                                <td>手动关闭 Toast</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="../js/application.js"></script>
+    
+    <script>
+        // Icon SVGs for different alert types
+        const icons = {
+            success: `<svg xmlns="http://www.w3.org/2000/svg" class="size-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>`,
+            info: `<svg xmlns="http://www.w3.org/2000/svg" class="size-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>`,
+            warning: `<svg xmlns="http://www.w3.org/2000/svg" class="size-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+            </svg>`,
+            error: `<svg xmlns="http://www.w3.org/2000/svg" class="size-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>`
+        };
+
+        function showToast(type, title, message) {
+            const position = document.getElementById('position').value;
+            const duration = parseInt(document.getElementById('duration').value);
+            const autoDismiss = document.getElementById('autoDismiss').checked;
+            const pauseOnHover = document.getElementById('pauseOnHover').checked;
+            const showProgress = document.getElementById('showProgress').checked;
+            
+            createToast(type, title, message, position, duration, autoDismiss, pauseOnHover, showProgress);
+        }
+
+        function showCustomToast() {
+            const position = document.getElementById('position').value;
+            const duration = parseInt(document.getElementById('duration').value);
+            const autoDismiss = document.getElementById('autoDismiss').checked;
+            const pauseOnHover = document.getElementById('pauseOnHover').checked;
+            const showProgress = document.getElementById('showProgress').checked;
+            
+            createToast('info', '自定义 Toast', '这是使用自定义配置创建的 Toast', position, duration, autoDismiss, pauseOnHover, showProgress);
+        }
+
+        function createToast(type, title, message, position, duration, autoDismiss, pauseOnHover, showProgress) {
+            const container = document.getElementById('toast-container');
+            
+            // Color mapping
+            const colorMap = {
+                success: { alert: 'alert-success', progress: 'bg-success-content/50', progressBg: 'bg-success/30' },
+                info: { alert: 'alert-info', progress: 'bg-info-content/50', progressBg: 'bg-info/30' },
+                warning: { alert: 'alert-warning', progress: 'bg-warning-content/50', progressBg: 'bg-warning/30' },
+                error: { alert: 'alert-error', progress: 'bg-error-content/50', progressBg: 'bg-error/30' }
+            };
+            
+            const colors = colorMap[type] || colorMap.info;
+            
+            const progressHTML = showProgress ? `
+                <div class="absolute bottom-0 inset-x-0 h-1 ${colors.progressBg} rounded-b-box">
+                    <div data-toast-target="progress" class="h-full ${colors.progress} transition-all duration-100 ease-linear rounded-b-box" style="width: 100%"></div>
+                </div>
+            ` : '';
+            
+            const toastHTML = `
+                <div data-controller="toast" 
+                     data-toast-duration-value="${duration}"
+                     data-toast-auto-dismiss-value="${autoDismiss}"
+                     data-toast-pause-on-hover-value="${pauseOnHover}">
+                    <div class="toast ${position} z-50">
+                        <div class="alert ${colors.alert} shadow-lg relative overflow-hidden!" data-toast-target="alert">
+                            ${icons[type]}
+                            <div class="flex flex-col gap-1">
+                                <span class="font-semibold">${title}</span>
+                                <span class="text-xs opacity-80">${message}</span>
+                            </div>
+                            <button type="button" data-action="toast#dismiss" class="btn btn-ghost btn-sm btn-circle">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+                            ${progressHTML}
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            container.insertAdjacentHTML('beforeend', toastHTML);
+        }
+    </script>
+</body>
+
+</html>

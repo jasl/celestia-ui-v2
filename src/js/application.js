@@ -5,6 +5,7 @@ import ThemeController from "./controllers/theme_controller"
 import AuthTabsController from "./controllers/auth_tabs_controller"
 import SidebarTabsController from "./controllers/sidebar_tabs_controller"
 import PlaygroundController from "./controllers/playground_controller"
+import ToastController from "./controllers/toast_controller"
 
 // Start Stimulus application
 const application = Application.start()
@@ -18,3 +19,4 @@ application.register("theme", ThemeController)
 application.register("auth-tabs", AuthTabsController)
 application.register("sidebar-tabs", SidebarTabsController)
 application.register("playground", PlaygroundController)
+application.register("toast", ToastController)
