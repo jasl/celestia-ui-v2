@@ -23,11 +23,6 @@ export default class extends Controller {
     // Show/hide forms
     this.loginFormTarget.classList.remove("hidden")
     this.registerFormTarget.classList.add("hidden")
-    
-    // Update subtitle
-    if (this.hasSubtitleTarget) {
-      this.subtitleTarget.textContent = "登录你的账号，继续昨晚没讲完的故事"
-    }
   }
 
   /**
@@ -41,10 +36,5 @@ export default class extends Controller {
     // Show/hide forms
     this.loginFormTarget.classList.add("hidden")
     this.registerFormTarget.classList.remove("hidden")
-    
-    // Update subtitle
-    if (this.hasSubtitleTarget) {
-      this.subtitleTarget.textContent = "创建新账号，开启你的冒险之旅"
-    }
   }
 }
