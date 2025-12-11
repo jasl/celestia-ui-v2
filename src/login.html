@@ -71,32 +71,30 @@
 
           <!-- Login Form -->
           <form class="space-y-4" data-panel-switcher-target="panel" data-panel-switcher-id="login">
-            <div class="form-control">
-              <label class="label">
-                <span class="label-text text-sm">邮箱地址</span>
-              </label>
-              <label class="input input-bordered flex items-center gap-3 w-full">
+            <fieldset class="fieldset">
+              <legend class="fieldset-legend text-sm">邮箱地址</legend>
+              <label class="input flex items-center gap-3 w-full">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 opacity-50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <rect width="20" height="16" x="2" y="4" rx="2"/>
                   <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
                 </svg>
                 <input type="email" class="grow" placeholder="you@example.com" required>
               </label>
-            </div>
+            </fieldset>
 
-            <div class="form-control">
-              <label class="label">
-                <span class="label-text text-sm">密码</span>
-                <a href="#" class="label-text-alt link link-hover text-xs">忘记密码？</a>
-              </label>
-              <label class="input input-bordered flex items-center gap-3 w-full">
+            <fieldset class="fieldset">
+              <legend class="fieldset-legend text-sm flex justify-between items-center w-full">
+                <span>密码</span>
+                <a href="#" class="link link-hover text-xs font-normal">忘记密码？</a>
+              </legend>
+              <label class="input flex items-center gap-3 w-full">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 opacity-50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
                   <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
                 </svg>
                 <input type="password" class="grow" placeholder="••••••••" required>
               </label>
-            </div>
+            </fieldset>
 
             <div class="flex items-center justify-between">
               <label class="flex items-center gap-2 cursor-pointer">
@@ -112,49 +110,41 @@
 
           <!-- Register Form (hidden by default) -->
           <form class="space-y-4 hidden" data-panel-switcher-target="panel" data-panel-switcher-id="register">
-            <div class="form-control">
-              <label class="label">
-                <span class="label-text text-sm">用户名</span>
-              </label>
-              <label class="input input-bordered flex items-center gap-3 w-full">
+            <fieldset class="fieldset">
+              <legend class="fieldset-legend text-sm">用户名</legend>
+              <label class="input flex items-center gap-3 w-full">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 opacity-50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/>
                   <circle cx="12" cy="7" r="4"/>
                 </svg>
                 <input type="text" class="grow" placeholder="你的冒险者名字" required>
               </label>
-            </div>
+            </fieldset>
 
-            <div class="form-control">
-              <label class="label">
-                <span class="label-text text-sm">邮箱地址</span>
-              </label>
-              <label class="input input-bordered flex items-center gap-3 w-full">
+            <fieldset class="fieldset">
+              <legend class="fieldset-legend text-sm">邮箱地址</legend>
+              <label class="input flex items-center gap-3 w-full">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 opacity-50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <rect width="20" height="16" x="2" y="4" rx="2"/>
                   <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
                 </svg>
                 <input type="email" class="grow" placeholder="you@example.com" required>
               </label>
-            </div>
+            </fieldset>
 
-            <div class="form-control">
-              <label class="label">
-                <span class="label-text text-sm">密码</span>
-              </label>
-              <label class="input input-bordered flex items-center gap-3 w-full">
+            <fieldset class="fieldset">
+              <legend class="fieldset-legend text-sm">密码</legend>
+              <label class="input flex items-center gap-3 w-full">
                 <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 opacity-50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
                   <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
                 </svg>
                 <input type="password" class="grow" placeholder="至少 8 个字符" required minlength="8">
               </label>
-              <label class="label">
-                <span class="label-text-alt text-xs text-base-content/50">
-                  密码需要至少 8 个字符
-                </span>
-              </label>
-            </div>
+              <p class="label text-xs text-base-content/50">
+                密码需要至少 8 个字符
+              </p>
+            </fieldset>
 
             <p class="text-xs text-base-content/60 text-center">
               注册即表示你同意我们的

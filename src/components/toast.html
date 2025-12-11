@@ -74,18 +74,14 @@
                 <div class="divider">配置选项</div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="form-control">
-                        <label class="label">
-                            <span class="label-text">显示时长 (毫秒)</span>
-                        </label>
-                        <input type="number" id="duration" value="5000" min="1000" max="30000" step="1000" class="input input-bordered">
-                    </div>
+                    <fieldset class="fieldset">
+                        <legend class="fieldset-legend">显示时长 (毫秒)</legend>
+                        <input type="number" id="duration" value="5000" min="1000" max="30000" step="1000" class="input">
+                    </fieldset>
                     
-                    <div class="form-control">
-                        <label class="label">
-                            <span class="label-text">位置</span>
-                        </label>
-                        <select id="position" class="select select-bordered">
+                    <fieldset class="fieldset">
+                        <legend class="fieldset-legend">位置</legend>
+                        <select id="position" class="select">
                             <option value="toast-top toast-end" selected>右上角</option>
                             <option value="toast-top toast-start">左上角</option>
                             <option value="toast-top toast-center">顶部居中</option>
@@ -93,27 +89,27 @@
                             <option value="toast-bottom toast-start">左下角</option>
                             <option value="toast-bottom toast-center">底部居中</option>
                         </select>
-                    </div>
+                    </fieldset>
                 </div>
 
-                <div class="form-control mt-4">
-                    <label class="label cursor-pointer justify-start gap-4">
+                <div class="mt-4">
+                    <label class="flex items-center cursor-pointer gap-4">
                         <input type="checkbox" id="autoDismiss" checked class="checkbox checkbox-primary">
-                        <span class="label-text">自动消失</span>
+                        <span>自动消失</span>
                     </label>
                 </div>
 
-                <div class="form-control">
-                    <label class="label cursor-pointer justify-start gap-4">
+                <div>
+                    <label class="flex items-center cursor-pointer gap-4">
                         <input type="checkbox" id="pauseOnHover" checked class="checkbox checkbox-primary">
-                        <span class="label-text">悬停时暂停</span>
+                        <span>悬停时暂停</span>
                     </label>
                 </div>
 
-                <div class="form-control">
-                    <label class="label cursor-pointer justify-start gap-4">
+                <div>
+                    <label class="flex items-center cursor-pointer gap-4">
                         <input type="checkbox" id="showProgress" checked class="checkbox checkbox-primary">
-                        <span class="label-text">显示进度条</span>
+                        <span>显示进度条</span>
                     </label>
                 </div>
 

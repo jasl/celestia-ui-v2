@@ -110,11 +110,11 @@
                 <ul tabindex="0" class="dropdown-content menu menu-sm mt-3 w-52 rounded-box bg-base-200/95 backdrop-blur-md shadow-lg z-[100]">
                   <li class="menu-title text-xs">当前用户</li>
                   <li><span class="font-medium">@storyteller</span></li>
-                  <hr class="my-1 border-base-content/10">
+                  <li><hr class="border-base-content/10 my-1"></li>
                   <li><a href="#">个人资料</a></li>
                   <li><a href="#">设置</a></li>
                   <li><a href="#">历史对话</a></li>
-                  <hr class="my-1 border-base-content/10">
+                  <li><hr class="border-base-content/10 my-1"></li>
                   <li><a href="/" class="text-error">退出登录</a></li>
                 </ul>
               </div>
@@ -270,7 +270,7 @@
               <div class="flex items-end gap-2">
                 <div class="flex-1 relative">
                   <textarea 
-                    class="textarea textarea-bordered w-full resize-none pr-10" 
+                    class="textarea w-full resize-none pr-10" 
                     rows="2"
                     placeholder="输入你的回复，在这里继续故事..."
                     data-playground-target="input"
@@ -326,17 +326,15 @@
             <!-- Content -->
             <div class="flex-1 overflow-y-auto p-4 space-y-6">
               <!-- Model Selection -->
-              <div class="form-control">
-                <label class="label">
-                  <span class="label-text text-xs uppercase tracking-wide opacity-70">模型</span>
-                </label>
+              <fieldset class="fieldset">
+                <legend class="fieldset-legend text-xs uppercase tracking-wide opacity-70">模型</legend>
                 <select class="select select-sm w-full">
                   <option>Claude 3.5 Sonnet</option>
                   <option>GPT-4.1</option>
                   <option>本地 · Mistral 7B</option>
                   <option>Gemini Pro</option>
                 </select>
-              </div>
+              </fieldset>
 
               <!-- Temperature -->
               <div class="space-y-2">
