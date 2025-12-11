@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="celestia-dawn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tabs Component Demo</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../assets/application.css">
+</head>
+
+<body class="min-h-screen bg-base-200 p-8">
+    <!-- Main Content -->
+    <div class="max-w-4xl mx-auto space-y-8">
+        <!-- Header -->
+        <div class="card bg-base-100 shadow-xl">
+            <div class="card-body">
+                <h1 class="card-title text-2xl mb-4">Tabs 组件演示</h1>
+                <p class="text-base-content/70">
+                    daisyUI 提供了原生的 Tabs 实现，使用 radio input + tab-content 结构，CSS 自动处理显示/隐藏，无需 JavaScript。
+                </p>
+                <div class="alert alert-info mt-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M12 16v-4"/>
+                        <path d="M12 8h.01"/>
+                    </svg>
+                    <div>
+                        <div class="font-semibold">推荐使用 daisyUI 原生实现</div>
+                        <div class="text-sm">仅在 tabs 和 panels 需要分离的场景（如固定头部 + 可滚动内容）才使用 Panel Switcher Controller</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- daisyUI Native: tabs-box -->
+        <div class="card bg-base-100 shadow-xl">
+            <div class="card-body">
+                <h2 class="card-title text-xl mb-4">daisyUI 原生：tabs-box</h2>
+                
+                <div class="tabs tabs-box">
+                    <input type="radio" name="demo_tabs_box" class="tab" aria-label="标签一" checked="checked" />
+                    <div class="tab-content p-4">
+                        <h3 class="font-bold mb-2">标签一的内容</h3>
+                        <p class="text-base-content/70">这是第一个标签页的内容。使用 daisyUI 原生实现，无需 JavaScript。</p>
+                    </div>
+
+                    <input type="radio" name="demo_tabs_box" class="tab" aria-label="标签二" />
+                    <div class="tab-content p-4">
+                        <h3 class="font-bold mb-2">标签二的内容</h3>
+                        <p class="text-base-content/70">这是第二个标签页的内容。</p>
+                    </div>
+
+                    <input type="radio" name="demo_tabs_box" class="tab" aria-label="标签三" />
+                    <div class="tab-content p-4">
+                        <h3 class="font-bold mb-2">标签三的内容</h3>
+                        <p class="text-base-content/70">这是第三个标签页的内容。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- daisyUI Native: tabs-border -->
+        <div class="card bg-base-100 shadow-xl">
+            <div class="card-body">
+                <h2 class="card-title text-xl mb-4">daisyUI 原生：tabs-border</h2>
+                
+                <div class="tabs tabs-border">
+                    <input type="radio" name="demo_tabs_border" class="tab" aria-label="首页" checked="checked" />
+                    <div class="tab-content border-base-300 p-4">首页内容</div>
+
+                    <input type="radio" name="demo_tabs_border" class="tab" aria-label="产品" />
+                    <div class="tab-content border-base-300 p-4">产品内容</div>
+
+                    <input type="radio" name="demo_tabs_border" class="tab" aria-label="关于" />
+                    <div class="tab-content border-base-300 p-4">关于内容</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- daisyUI Native: tabs-lift -->
+        <div class="card bg-base-100 shadow-xl">
+            <div class="card-body">
+                <h2 class="card-title text-xl mb-4">daisyUI 原生：tabs-lift</h2>
+                
+                <div class="tabs tabs-lift">
+                    <input type="radio" name="demo_tabs_lift" class="tab" aria-label="文档" checked="checked" />
+                    <div class="tab-content bg-base-100 border-base-300 p-6">文档内容</div>
+
+                    <input type="radio" name="demo_tabs_lift" class="tab" aria-label="示例" />
+                    <div class="tab-content bg-base-100 border-base-300 p-6">示例内容</div>
+
+                    <input type="radio" name="demo_tabs_lift" class="tab" aria-label="API" />
+                    <div class="tab-content bg-base-100 border-base-300 p-6">API 内容</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Server-side default selection -->
+        <div class="card bg-base-100 shadow-xl">
+            <div class="card-body">
+                <h2 class="card-title text-xl mb-4">服务端指定默认 Tab</h2>
+                <p class="text-base-content/70 mb-4">
+                    后端通过在对应的 radio input 上添加 <code class="badge badge-ghost">checked="checked"</code> 来指定默认激活的 Tab。
+                </p>
+                
+                <div class="tabs tabs-box">
+                    <input type="radio" name="demo_server_default" class="tab" aria-label="Tab 1" />
+                    <div class="tab-content p-4">第一个 Tab</div>
+
+                    <!-- 后端设置 checked="checked" -->
+                    <input type="radio" name="demo_server_default" class="tab" aria-label="Tab 2 (默认)" checked="checked" />
+                    <div class="tab-content p-4">这是后端预先选中的 Tab</div>
+
+                    <input type="radio" name="demo_server_default" class="tab" aria-label="Tab 3" />
+                    <div class="tab-content p-4">第三个 Tab</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Panel Switcher Controller -->
+        <div class="card bg-base-100 shadow-xl">
+            <div class="card-body">
+                <h2 class="card-title text-xl mb-4">Panel Switcher Controller</h2>
+                <p class="text-base-content/70 mb-4">
+                    当 tabs 和 panels 需要分离时（如固定头部 tabs + 可滚动 panels），使用 Panel Switcher Controller。
+                </p>
+                
+                <div data-controller="panel-switcher" data-panel-switcher-default-value="ps1">
+                    <!-- Tabs 可以在任意位置 -->
+                    <div role="tablist" class="tabs tabs-box mb-4">
+                        <button role="tab" class="tab" data-panel-switcher-target="tab" data-panel-switcher-id-param="ps1" data-action="click->panel-switcher#switch">
+                            角色
+                        </button>
+                        <button role="tab" class="tab" data-panel-switcher-target="tab" data-panel-switcher-id-param="ps2" data-action="click->panel-switcher#switch">
+                            场景
+                        </button>
+                        <button role="tab" class="tab" data-panel-switcher-target="tab" data-panel-switcher-id-param="ps3" data-action="click->panel-switcher#switch">
+                            记忆
+                        </button>
+                    </div>
+                    
+                    <!-- Panels 可以在其他位置 -->
+                    <div class="bg-base-200 rounded-box p-4">
+                        <div data-panel-switcher-target="panel" data-panel-switcher-id="ps1">
+                            <h3 class="font-bold">角色面板</h3>
+                            <p class="text-base-content/70">这里显示角色列表...</p>
+                        </div>
+                        <div class="hidden" data-panel-switcher-target="panel" data-panel-switcher-id="ps2">
+                            <h3 class="font-bold">场景面板</h3>
+                            <p class="text-base-content/70">这里显示场景列表...</p>
+                        </div>
+                        <div class="hidden" data-panel-switcher-target="panel" data-panel-switcher-id="ps3">
+                            <h3 class="font-bold">记忆面板</h3>
+                            <p class="text-base-content/70">这里显示记忆条目...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Code Examples -->
+        <div class="card bg-base-100 shadow-xl">
+            <div class="card-body">
+                <h2 class="card-title text-xl mb-4">代码示例</h2>
+                
+                <div class="divider text-sm">daisyUI 原生 (推荐)</div>
+                <div class="mockup-code text-sm">
+                    <pre data-prefix="1"><code>&lt;div class="tabs tabs-box"&gt;</code></pre>
+                    <pre data-prefix="2"><code>  &lt;input type="radio" name="my_tabs" class="tab" aria-label="Tab 1" checked /&gt;</code></pre>
+                    <pre data-prefix="3"><code>  &lt;div class="tab-content p-4"&gt;Content 1&lt;/div&gt;</code></pre>
+                    <pre data-prefix="4"><code></code></pre>
+                    <pre data-prefix="5"><code>  &lt;input type="radio" name="my_tabs" class="tab" aria-label="Tab 2" /&gt;</code></pre>
+                    <pre data-prefix="6"><code>  &lt;div class="tab-content p-4"&gt;Content 2&lt;/div&gt;</code></pre>
+                    <pre data-prefix="7"><code>&lt;/div&gt;</code></pre>
+                </div>
+
+                <div class="divider text-sm">Panel Switcher (分离结构)</div>
+                <div class="mockup-code text-sm">
+                    <pre data-prefix="1"><code>&lt;div data-controller="panel-switcher" data-panel-switcher-default-value="p1"&gt;</code></pre>
+                    <pre data-prefix="2"><code>  &lt;!-- Tabs --&gt;</code></pre>
+                    <pre data-prefix="3"><code>  &lt;div class="tabs tabs-box"&gt;</code></pre>
+                    <pre data-prefix="4"><code>    &lt;button class="tab" data-panel-switcher-target="tab"</code></pre>
+                    <pre data-prefix="5"><code>            data-panel-switcher-id-param="p1"</code></pre>
+                    <pre data-prefix="6"><code>            data-action="click-&gt;panel-switcher#switch"&gt;Tab 1&lt;/button&gt;</code></pre>
+                    <pre data-prefix="7"><code>  &lt;/div&gt;</code></pre>
+                    <pre data-prefix="8"><code></code></pre>
+                    <pre data-prefix="9"><code>  &lt;!-- Panels (分离的位置) --&gt;</code></pre>
+                    <pre data-prefix="10"><code>  &lt;div data-panel-switcher-target="panel" data-panel-switcher-id="p1"&gt;...&lt;/div&gt;</code></pre>
+                    <pre data-prefix="11"><code>  &lt;div class="hidden" data-panel-switcher-target="panel" data-panel-switcher-id="p2"&gt;...&lt;/div&gt;</code></pre>
+                    <pre data-prefix="12"><code>&lt;/div&gt;</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- API Reference -->
+        <div class="card bg-base-100 shadow-xl">
+            <div class="card-body">
+                <h2 class="card-title text-xl mb-4">Panel Switcher API 参考</h2>
+                
+                <h3 class="font-semibold mb-2">Values (配置选项)</h3>
+                <div class="overflow-x-auto">
+                    <table class="table table-zebra">
+                        <thead>
+                            <tr>
+                                <th>属性</th>
+                                <th>类型</th>
+                                <th>默认值</th>
+                                <th>说明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code class="text-primary">data-panel-switcher-default-value</code></td>
+                                <td>String</td>
+                                <td>-</td>
+                                <td>默认激活的 Panel ID</td>
+                            </tr>
+                            <tr>
+                                <td><code class="text-primary">data-panel-switcher-active-class-value</code></td>
+                                <td>String</td>
+                                <td>"tab-active"</td>
+                                <td>激活状态的 CSS 类名</td>
+                            </tr>
+                            <tr>
+                                <td><code class="text-primary">data-panel-switcher-hidden-class-value</code></td>
+                                <td>String</td>
+                                <td>"hidden"</td>
+                                <td>隐藏状态的 CSS 类名</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 class="font-semibold mb-2 mt-6">Targets (目标元素)</h3>
+                <div class="overflow-x-auto">
+                    <table class="table table-zebra">
+                        <thead>
+                            <tr>
+                                <th>Target</th>
+                                <th>说明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code class="text-primary">data-panel-switcher-target="tab"</code></td>
+                                <td>Tab 按钮元素</td>
+                            </tr>
+                            <tr>
+                                <td><code class="text-primary">data-panel-switcher-target="panel"</code></td>
+                                <td>Panel 内容元素</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <h3 class="font-semibold mb-2 mt-6">Events (事件)</h3>
+                <div class="overflow-x-auto">
+                    <table class="table table-zebra">
+                        <thead>
+                            <tr>
+                                <th>事件名</th>
+                                <th>Detail</th>
+                                <th>说明</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code class="text-primary">panel-switcher:changed</code></td>
+                                <td><code>{ panelId: string }</code></td>
+                                <td>Panel 切换时触发</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module" src="../js/application.js"></script>
+</body>
+
+</html>

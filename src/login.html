@@ -42,11 +42,11 @@
   </div>
 
   <!-- Main content -->
-  <main class="min-h-dvh flex items-center justify-center p-4" data-controller="auth-tabs">
+  <main class="min-h-dvh flex items-center justify-center p-4">
     <div class="relative w-full max-w-md">
       <!-- Login/Register Card -->
       <div class="card bg-base-200/70 backdrop-blur-xl shadow-2xl border border-base-300/40">
-        <div class="card-body p-6 md:p-8">
+        <div class="card-body p-6 md:p-8" data-controller="panel-switcher" data-panel-switcher-default-value="login">
           <!-- Logo & Title -->
           <div class="flex flex-col items-center gap-3 mb-6">
             <a href="/" class="avatar">
@@ -60,17 +60,17 @@
           </div>
 
           <!-- Tab switcher -->
-          <div class="tabs tabs-box w-full mb-6">
-            <button class="tab flex-1 tab-active" data-auth-tabs-target="loginTab" data-action="click->auth-tabs#showLogin">
+          <div role="tablist" class="tabs tabs-box w-full mb-6">
+            <button role="tab" class="tab flex-1" data-panel-switcher-target="tab" data-panel-switcher-id-param="login" data-action="click->panel-switcher#switch">
               登录
             </button>
-            <button class="tab flex-1" data-auth-tabs-target="registerTab" data-action="click->auth-tabs#showRegister">
+            <button role="tab" class="tab flex-1" data-panel-switcher-target="tab" data-panel-switcher-id-param="register" data-action="click->panel-switcher#switch">
               注册
             </button>
           </div>
 
           <!-- Login Form -->
-          <form class="space-y-4" data-auth-tabs-target="loginForm">
+          <form class="space-y-4" data-panel-switcher-target="panel" data-panel-switcher-id="login">
             <div class="form-control">
               <label class="label">
                 <span class="label-text text-sm">邮箱地址</span>
@@ -111,7 +111,7 @@
           </form>
 
           <!-- Register Form (hidden by default) -->
-          <form class="space-y-4 hidden" data-auth-tabs-target="registerForm">
+          <form class="space-y-4 hidden" data-panel-switcher-target="panel" data-panel-switcher-id="register">
             <div class="form-control">
               <label class="label">
                 <span class="label-text text-sm">用户名</span>
@@ -199,3 +199,4 @@
 </body>
 
 </html>
+

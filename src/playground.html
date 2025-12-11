@@ -444,20 +444,20 @@
         </div>
 
         <!-- Tabs & Content Container -->
-        <div class="flex-1 flex flex-col overflow-hidden" data-controller="sidebar-tabs">
+        <div class="flex-1 flex flex-col overflow-hidden" data-controller="panel-switcher" data-panel-switcher-default-value="characters">
           <!-- Tabs -->
           <div class="px-3 pt-3 shrink-0">
             <div role="tablist" class="tabs tabs-box tabs-sm w-full">
-              <button role="tab" class="tab tab-active" data-sidebar-tabs-target="tab" data-action="click->sidebar-tabs#switch" data-panel="characters">角色</button>
-              <button role="tab" class="tab" data-sidebar-tabs-target="tab" data-action="click->sidebar-tabs#switch" data-panel="scenes">场景</button>
-              <button role="tab" class="tab" data-sidebar-tabs-target="tab" data-action="click->sidebar-tabs#switch" data-panel="memory">记忆</button>
+              <button role="tab" class="tab" data-panel-switcher-target="tab" data-panel-switcher-id-param="characters" data-action="click->panel-switcher#switch">角色</button>
+              <button role="tab" class="tab" data-panel-switcher-target="tab" data-panel-switcher-id-param="scenes" data-action="click->panel-switcher#switch">场景</button>
+              <button role="tab" class="tab" data-panel-switcher-target="tab" data-panel-switcher-id-param="memory" data-action="click->panel-switcher#switch">记忆</button>
             </div>
           </div>
 
           <!-- Tab Content -->
           <div class="flex-1 overflow-y-auto">
           <!-- Characters Panel -->
-          <div data-sidebar-tabs-target="panel" data-name="characters">
+          <div data-panel-switcher-target="panel" data-panel-switcher-id="characters">
             <!-- Section: 正在值班 -->
             <div class="px-3 pt-3 pb-1 flex items-center justify-between">
               <span class="text-xs font-medium opacity-60 uppercase tracking-wide">正在值班</span>
@@ -530,9 +530,9 @@
           </div>
 
           <!-- Scenes Panel -->
-          <div class="hidden" data-sidebar-tabs-target="panel" data-name="scenes">
+          <div class="hidden" data-panel-switcher-target="panel" data-panel-switcher-id="scenes">
             <!-- Section: 当前场景 -->
-            <div class="px-3 pt-3 pb-1">
+            <div class="px-3 pt-3 pb-1 flex items-center justify-between">
               <span class="text-xs font-medium opacity-60 uppercase tracking-wide">当前场景</span>
             </div>
             <ul class="list bg-transparent px-3">
@@ -592,8 +592,8 @@
           </div>
 
           <!-- Memory Panel -->
-          <div class="hidden" data-sidebar-tabs-target="panel" data-name="memory">
-            <div class="px-3 pt-3 pb-1">
+          <div class="hidden" data-panel-switcher-target="panel" data-panel-switcher-id="memory">
+            <div class="px-3 pt-3 pb-1 flex items-center justify-between">
               <span class="text-xs font-medium opacity-60 uppercase tracking-wide">记忆条目</span>
             </div>
             <ul class="list bg-transparent px-3">

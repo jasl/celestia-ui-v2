@@ -178,3 +178,4 @@ export default class extends Controller {
     return responses[Math.floor(Math.random() * responses.length)]
   }
 }
+

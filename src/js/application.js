@@ -2,8 +2,7 @@ import { Application } from "@hotwired/stimulus"
 
 // Import controllers
 import ThemeController from "./controllers/theme_controller"
-import AuthTabsController from "./controllers/auth_tabs_controller"
-import SidebarTabsController from "./controllers/sidebar_tabs_controller"
+import PanelSwitcherController from "./controllers/panel_switcher_controller"
 import PlaygroundController from "./controllers/playground_controller"
 import ToastController from "./controllers/toast_controller"
 
@@ -16,7 +15,7 @@ window.Stimulus = application
 
 // Register controllers
 application.register("theme", ThemeController)
-application.register("auth-tabs", AuthTabsController)
-application.register("sidebar-tabs", SidebarTabsController)
+application.register("panel-switcher", PanelSwitcherController)
 application.register("playground", PlaygroundController)
 application.register("toast", ToastController)
+
