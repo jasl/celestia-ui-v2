@@ -5,7 +5,7 @@ import { Controller } from "@hotwired/stimulus"
  * Handles the main chat interface interactions
  */
 export default class extends Controller {
-  static targets = ["leftDrawer", "rightDrawer", "messages", "input", "typingIndicator"]
+  static targets = ["messages", "input", "typingIndicator"]
 
   connect() {
     // Scroll to bottom of messages on load

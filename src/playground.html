@@ -12,15 +12,15 @@
 
 <body class="h-dvh overflow-hidden bg-base-100" data-controller="playground">
   <!-- Main Layout: Nested Drawers for Left and Right panels -->
-  <div class="drawer lg:drawer-open h-full" data-playground-target="leftDrawer">
-    <input id="left-drawer" type="checkbox" class="drawer-toggle">
+  <div class="drawer lg:drawer-open h-full" data-controller="drawer" data-drawer-id-value="left-drawer">
+    <input id="left-drawer" type="checkbox" class="drawer-toggle" data-drawer-target="toggle" data-action="change->drawer#handleChange">
     
     <!-- Main Content Area (includes right drawer) -->
     <div class="drawer-content flex flex-col h-full">
       
       <!-- Right Drawer wrapper -->
-      <div class="drawer drawer-end xl:drawer-open h-full" data-playground-target="rightDrawer">
-        <input id="right-drawer" type="checkbox" class="drawer-toggle">
+      <div class="drawer drawer-end xl:drawer-open h-full" data-controller="drawer" data-drawer-id-value="right-drawer">
+        <input id="right-drawer" type="checkbox" class="drawer-toggle" data-drawer-target="toggle" data-action="change->drawer#handleChange">
         
         <!-- Center Content -->
         <div class="drawer-content flex flex-col h-full">
@@ -306,7 +306,7 @@
         </div>
 
         <!-- Right Drawer Side (Settings Panel) -->
-        <div class="drawer-side z-40">
+        <div class="drawer-side z-[105]">
           <label for="right-drawer" aria-label="关闭设置面板" class="drawer-overlay"></label>
           <aside class="w-80 h-full bg-base-200/95 backdrop-blur-md border-l border-base-300/40 flex flex-col">
             <!-- Header -->
@@ -423,7 +423,7 @@
     </div>
 
     <!-- Left Drawer Side (Characters/Scenes/Memory Panel) -->
-    <div class="drawer-side z-50">
+    <div class="drawer-side z-[110]">
       <label for="left-drawer" aria-label="关闭角色面板" class="drawer-overlay"></label>
       <aside class="w-72 xl:w-80 h-full bg-base-200/95 backdrop-blur-md border-r border-base-300/40 flex flex-col">
         <!-- Header -->
