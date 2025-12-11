@@ -20,4 +20,3 @@ application.register("panel-switcher", PanelSwitcherController)
 application.register("playground", PlaygroundController)
 application.register("toast", ToastController)
 application.register("drawer", DrawerController)
-

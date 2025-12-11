@@ -5,11 +5,13 @@ import { Controller } from "@hotwired/stimulus"
  * Handles the main chat interface interactions
  */
 export default class extends Controller {
-  static targets = ["messages", "input", "typingIndicator"]
+  static targets = ["messages", "input", "typingIndicator", "sendButton"]
 
   connect() {
     // Scroll to bottom of messages on load
     this.scrollToBottom()
+    // Initialize sending state
+    this.isSending = false
   }
 
   /**
@@ -27,10 +29,16 @@ export default class extends Controller {
    * Send a message
    */
   send() {
+    // Prevent sending if already processing
+    if (this.isSending) return
+    
     const input = this.inputTarget
     const message = input.value.trim()
     
     if (!message) return
+    
+    // Lock input before any operation
+    this.lockInput()
     
     // Add user message to chat
     this.addUserMessage(message)
@@ -45,7 +53,36 @@ export default class extends Controller {
     setTimeout(() => {
       this.hideTypingIndicator()
       this.addAIMessage(this.generateMockResponse(message))
+      // Unlock input after AI response
+      this.unlockInput()
     }, 1500 + Math.random() * 1000)
+  }
+
+  /**
+   * Lock input during message processing
+   */
+  lockInput() {
+    this.isSending = true
+    if (this.hasInputTarget) {
+      this.inputTarget.disabled = true
+    }
+    if (this.hasSendButtonTarget) {
+      this.sendButtonTarget.disabled = true
+    }
+  }
+
+  /**
+   * Unlock input after message processing
+   */
+  unlockInput() {
+    this.isSending = false
+    if (this.hasInputTarget) {
+      this.inputTarget.disabled = false
+      this.inputTarget.focus()
+    }
+    if (this.hasSendButtonTarget) {
+      this.sendButtonTarget.disabled = false
+    }
   }
 
   /**
@@ -124,6 +161,8 @@ export default class extends Controller {
    */
   showTypingIndicator() {
     if (this.hasTypingIndicatorTarget) {
+      // Move typing indicator to end of messages container
+      this.messagesTarget.appendChild(this.typingIndicatorTarget)
       this.typingIndicatorTarget.style.display = ""
       this.scrollToBottom()
     }
@@ -178,4 +217,3 @@ export default class extends Controller {
     return responses[Math.floor(Math.random() * responses.length)]
   }
 }
-
