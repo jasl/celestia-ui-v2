@@ -1,0 +1,24 @@
+{
+  "name": "celestia-ui",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@hotwired/stimulus": "^3.2.2"
+  },
+  "devDependencies": {
+    "@iconify-json/lucide": "^1.2.79",
+    "@iconify/tailwind4": "^1.2.0",
+    "@tailwindcss/vite": "^4.1.17",
+    "daisyui": "^5.5.8",
+    "tailwindcss": "^4.1.17",
+    "tailwindcss-motion": "^1.1.1",
+    "vite": "^7.2.7"
+  }
+}
+

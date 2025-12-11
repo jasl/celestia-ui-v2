@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="celestia-dawn">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Components</title>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="../assets/application.css">
+</head>
+
+<body>
+    <div class="text-base-content pt-6 transition-colors duration-500 bg-base-100">
+        <div class="flex items-center justify-between gap-4 px-8 ps-10">
+            <h2 class="font-title text-lg md:max-lg:hidden">
+                Color Palette
+            </h2>
+            <div class="tabs tabs-box tabs-sm bg-base-300 inline-flex">
+                <label class="tab" title="Components Demo">
+                    <input aria-label="Components Demo" name="previewtabs" type="radio" value="Components Demo">
+                    <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2" fill="none"
+                            stroke="currentColor">
+                            <rect width="7" height="9" x="3" y="3" rx="1"></rect>
+                            <rect width="7" height="5" x="14" y="3" rx="1"></rect>
+                            <rect width="7" height="9" x="14" y="12" rx="1"></rect>
+                            <rect width="7" height="5" x="3" y="16" rx="1"></rect>
+                        </g>
+                    </svg>
+                </label>
+                <label class="tab" title="Component Variants">
+                    <input aria-label="Component Variants" name="previewtabs" type="radio" value="Component Variants">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="size-4">
+                        <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2.5" fill="none"
+                            stroke="currentColor">
+                            <path d="M4 6l5.5 0"></path>
+                            <path d="M4 10l5.5 0"></path>
+                            <path d="M4 14l5.5 0"></path>
+                            <path d="M4 18l5.5 0"></path>
+                            <path d="M14.5 6l5.5 0"></path>
+                            <path d="M14.5 10l5.5 0"></path>
+                            <path d="M14.5 14l5.5 0"></path>
+                            <path d="M14.5 18l5.5 0"></path>
+                        </g>
+                    </svg>
+                </label>
+                <label class="tab" title="Color Palette">
+                    <input aria-label="Color Palette" name="previewtabs" type="radio" value="Color Palette">
+                    <svg class="size-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <g stroke-linejoin="round" stroke-linecap="round" stroke-width="2" fill="none"
+                            stroke="currentColor">
+                            <path d="M11 17a4 4 0 0 1-8 0V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2Z"></path>
+                            <path d="M16.7 13H19a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H7"></path>
+                            <path d="M 7 17h.01"></path>
+                            <path d="m11 8 2.3-2.3a2.4 2.4 0 0 1 3.404.004L18.6 7.6a2.4 2.4 0 0 1 .026 3.434L9.9 19.8">
+                            </path>
+                        </g>
+                    </svg>
+                </label>
+            </div>
+        </div>
+        <div class="px-8 py-6">
+            <div class="lg:border-base-content/5 mb-16 rounded-2xl lg:border lg:p-4">
+                <div class="border-base-content/10 overflow-hidden rounded-lg border-[0.5px]">
+                    <div class="grid grid-cols-1">
+                        <div
+                            class="bg-primary text-primary-content group border-base-content/10 grid h-24 place-content-end gap-1 p-6 text-end">
+                            <div
+                                class="font-title translate-y-1 text-sm font-semibold tracking-widest opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100">
+                                Primary
+                            </div>
+                            <div class="font-mono text-[0.625rem] tracking-widest tabular-nums">
+                                oklch(71% 0.202 349.761)
+                            </div>
+                        </div>
+                        <div
+                            class="bg-secondary text-secondary-content group border-base-content/10 grid h-24 place-content-end gap-1 p-6 text-end">
+                            <div
+                                class="font-title translate-y-1 text-sm font-semibold tracking-widest opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100">
+                                Secondary
+                            </div>
+                            <div class="font-mono text-[0.625rem] tracking-widest tabular-nums">
+                                oklch(70% 0.191 22.216)
+                            </div>
+                        </div>
+                        <div
+                            class="bg-accent text-accent-content group border-base-content/10 grid h-24 place-content-end gap-1 p-6 text-end">
+                            <div
+                                class="font-title translate-y-1 text-sm font-semibold tracking-widest opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100">
+                                Accent
+                            </div>
+                            <div class="font-mono text-[0.625rem] tracking-widest tabular-nums">
+                                oklch(70% 0.01 56.259)
+                            </div>
+                        </div>
+                        <div
+                            class="bg-neutral text-neutral-content group border-base-content/10 grid h-24 place-content-end gap-1 p-6 text-end">
+                            <div
+                                class="font-title translate-y-1 text-sm font-semibold tracking-widest opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100">
+                                Neutral
+                            </div>
+                            <div class="font-mono text-[0.625rem] tracking-widest tabular-nums">
+                                oklch(62% 0.194 149.214)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-base-content/10 mt-4 overflow-hidden rounded-lg border-[0.5px]">
+                    <div class="grid xl:grid-cols-3">
+                        <div
+                            class="bg-base-100 text-base-content group border-base-content/10 grid h-36 place-content-end gap-1 p-6 text-end">
+                            <div
+                                class="font-title translate-y-1 text-sm font-semibold tracking-widest opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100">
+                                Base 100
+                            </div>
+                            <div class="font-mono text-[0.625rem] tracking-widest tabular-nums">
+                                oklch(98% 0.018 155.826)
+                            </div>
+                        </div>
+                        <div
+                            class="bg-base-200 text-base-content group border-base-content/10 grid h-36 place-content-end gap-1 p-6 text-end">
+                            <div
+                                class="font-title translate-y-1 text-sm font-semibold tracking-widest opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100">
+                                Base 200</div>
+                            <div class="font-mono text-[0.625rem] tracking-widest tabular-nums">
+                                oklch(96% 0.044 156.743)
+                            </div>
+                        </div>
+                        <div
+                            class="bg-base-300 text-base-content group border-base-content/10 grid h-36 place-content-end gap-1 p-6 text-end">
+                            <div
+                                class="font-title translate-y-1 text-sm font-semibold tracking-widest opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100">
+                                Base 300
+                            </div>
+                            <div class="font-mono text-[0.625rem] tracking-widest tabular-nums">
+                                oklch(92% 0.084 155.995)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="border-base-content/10 mt-4 overflow-hidden rounded-lg border-[0.5px]">
+                    <div class="grid xl:grid-cols-4">
+                        <div
+                            class="bg-info text-info-content group border-base-content/10 grid h-24 place-content-end gap-1 p-6 text-end">
+                            <div
+                                class="font-title translate-y-1 text-sm font-semibold tracking-widest opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100">
+                                Info
+                            </div>
+                            <div class="font-mono text-[0.625rem] tracking-widest tabular-nums">
+                                oklch(62% 0.214 259.815)
+                            </div>
+                        </div>
+                        <div
+                            class="bg-success text-success-content group border-base-content/10 grid h-24 place-content-end gap-1 p-6 text-end">
+                            <div
+                                class="font-title translate-y-1 text-sm font-semibold tracking-widest opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100">
+                                Success
+                            </div>
+                            <div class="font-mono text-[0.625rem] tracking-widest tabular-nums">
+                                oklch(76% 0.233 130.85)
+                            </div>
+                        </div>
+                        <div
+                            class="bg-warning text-warning-content group border-base-content/10 grid h-24 place-content-end gap-1 p-6 text-end">
+                            <div
+                                class="font-title translate-y-1 text-sm font-semibold tracking-widest opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100">
+                                Warning
+                            </div>
+                            <div class="font-mono text-[0.625rem] tracking-widest tabular-nums">
+                                oklch(76% 0.188 70.08)
+                            </div>
+                        </div>
+                        <div
+                            class="bg-error text-error-content group border-base-content/10 grid h-24 place-content-end gap-1 p-6 text-end">
+                            <div
+                                class="font-title translate-y-1 text-sm font-semibold tracking-widest opacity-0 transition-all group-hover:translate-y-0 group-hover:opacity-100">
+                                Error
+                            </div>
+                            <div class="font-mono text-[0.625rem] tracking-widest tabular-nums">
+                                oklch(64% 0.246 16.439)
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
