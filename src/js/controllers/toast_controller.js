@@ -38,6 +38,10 @@ export default class extends Controller {
     this.startTime = null
     this.animationFrameId = null
 
+    // Store bound event handlers for proper cleanup
+    this.boundPause = this.pause.bind(this)
+    this.boundResume = this.resume.bind(this)
+
     // Show the toast with animation
     this.show()
 
@@ -47,8 +51,8 @@ export default class extends Controller {
       
       // Setup pause on hover if enabled
       if (this.pauseOnHoverValue) {
-        this.element.addEventListener("mouseenter", this.pause.bind(this))
-        this.element.addEventListener("mouseleave", this.resume.bind(this))
+        this.element.addEventListener("mouseenter", this.boundPause)
+        this.element.addEventListener("mouseleave", this.boundResume)
       }
     }
   }
@@ -56,10 +60,10 @@ export default class extends Controller {
   disconnect() {
     this.clearTimers()
     
-    // Remove event listeners
+    // Remove event listeners using stored bound references
     if (this.pauseOnHoverValue) {
-      this.element.removeEventListener("mouseenter", this.pause.bind(this))
-      this.element.removeEventListener("mouseleave", this.resume.bind(this))
+      this.element.removeEventListener("mouseenter", this.boundPause)
+      this.element.removeEventListener("mouseleave", this.boundResume)
     }
   }
 
