@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="celestia-dawn">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Celestia - AI 魔法酒馆</title>
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="stylesheet" href="./assets/application.css">
+  <script type="module" src="./js/application.js"></script>
+</head>
+
+<body class="min-h-dvh bg-base-100">
+  <!-- Background gradient overlay -->
+  <div class="fixed inset-0 bg-gradient-to-br from-primary/10 via-secondary/5 to-accent/10 pointer-events-none"></div>
+
+  <!-- Top Navigation -->
+  <nav class="navbar sticky top-0 z-50 h-14 px-4 md:px-8 bg-base-100/80 backdrop-blur-md border-b border-base-300/40">
+    <div class="navbar-start">
+      <a href="/" class="flex items-center gap-2">
+        <img src="/logo.png" alt="Celestia" class="w-8 h-8 rounded-lg">
+        <span class="font-semibold text-lg hidden sm:inline">Celestia</span>
+      </a>
+    </div>
+
+    <div class="navbar-center hidden md:flex">
+      <ul class="menu menu-horizontal gap-1 text-sm">
+        <li><a href="/" class="rounded-field">首页</a></li>
+        <li><a href="/playground.html" class="rounded-field">开始对话</a></li>
+        <li><a href="#features" class="rounded-field">功能特性</a></li>
+      </ul>
+    </div>
+
+    <div class="navbar-end gap-2">
+      <!-- Theme Toggle -->
+      <label class="swap swap-rotate btn btn-ghost btn-sm btn-circle" data-controller="theme">
+        <input type="checkbox" class="theme-controller" value="celestia-night" 
+               data-theme-target="checkbox" data-action="change->theme#toggle">
+        <!-- Sun icon -->
+        <svg class="swap-off w-5 h-5 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z"/>
+        </svg>
+        <!-- Moon icon -->
+        <svg class="swap-on w-5 h-5 fill-current" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z"/>
+        </svg>
+      </label>
+
+      <!-- Mobile menu -->
+      <div class="dropdown dropdown-end md:hidden">
+        <div tabindex="0" role="button" class="btn btn-ghost btn-sm btn-circle">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
+          </svg>
+        </div>
+        <ul tabindex="0" class="dropdown-content menu menu-sm mt-3 w-52 rounded-box bg-base-200/95 backdrop-blur-md shadow-lg z-50">
+          <li><a href="/">首页</a></li>
+          <li><a href="/playground.html">开始对话</a></li>
+          <li><a href="#features">功能特性</a></li>
+          <li class="divider"></li>
+          <li><a href="/login.html">登录</a></li>
+        </ul>
+      </div>
+
+      <!-- Desktop auth buttons -->
+      <a href="/login.html" class="btn btn-ghost btn-sm hidden md:inline-flex">登录</a>
+      <a href="/playground.html" class="btn btn-primary btn-sm">启动酒馆</a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <main class="relative">
+    <div class="max-w-6xl mx-auto px-4 md:px-8 py-12 md:py-20">
+      <!-- Hero Card -->
+      <div class="card bg-base-200/60 backdrop-blur-xl shadow-xl">
+        <div class="card-body p-6 md:p-10 lg:flex lg:flex-row lg:items-center lg:gap-12">
+          <!-- Left: Text content -->
+          <div class="space-y-6 lg:w-3/5">
+            <div class="flex flex-wrap gap-2">
+              <span class="badge badge-success badge-outline gap-1">
+                <span class="w-2 h-2 rounded-full bg-success animate-pulse"></span>
+                AI Playground v1.0
+              </span>
+              <span class="badge badge-secondary badge-outline">开源免费</span>
+            </div>
+            
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
+              织造你的<br>
+              <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">幻想世界</span>
+            </h1>
+            
+            <p class="text-base-content/70 text-sm md:text-base max-w-xl">
+              结合 SillyTavern 风格的强大功能与现代化 UI 设计。
+              在这家魔法酒馆里，你可以测试 AI 陪伴聊天、创作虚拟人物脚本、
+              甚至原型化一座 MUD 城市。
+            </p>
+
+            <div class="flex flex-wrap gap-3">
+              <a href="/playground.html" class="btn btn-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                </svg>
+                立即开始
+              </a>
+              <a href="#features" class="btn btn-ghost">
+                了解功能
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M7 7l5 5-5 5"/>
+                  <path d="M13 7l5 5-5 5"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Right: Preview mockup -->
+          <div class="mt-10 lg:mt-0 lg:w-2/5">
+            <div class="mockup-window border border-base-300/60 bg-base-300/40 shadow-lg">
+              <div class="px-4 py-4 space-y-3 bg-base-100/50">
+                <div class="chat chat-start">
+                  <div class="chat-image avatar placeholder">
+                    <div class="w-8 rounded-full bg-secondary text-secondary-content">
+                      <span class="text-xs">艾</span>
+                    </div>
+                  </div>
+                  <div class="chat-bubble chat-bubble-secondary text-sm">
+                    欢迎光临，旅人。今晚想聊聊哪段冒险？
+                  </div>
+                </div>
+                <div class="chat chat-end">
+                  <div class="chat-bubble chat-bubble-primary text-sm">
+                    先从创建一个新角色开始吧 ✨
+                  </div>
+                </div>
+                <div class="chat chat-start">
+                  <div class="chat-image avatar placeholder">
+                    <div class="w-8 rounded-full bg-secondary text-secondary-content">
+                      <span class="text-xs">艾</span>
+                    </div>
+                  </div>
+                  <div class="chat-bubble chat-bubble-secondary text-sm">
+                    好的！让我们一起编织这个故事...
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p class="mt-4 text-center text-xs text-base-content/50">
+              支持多角色对话 · 世界信息 · 记忆库 · 参数预设
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Features Section -->
+    <section id="features" class="max-w-6xl mx-auto px-4 md:px-8 py-12 md:py-16">
+      <div class="text-center mb-12">
+        <h2 class="text-2xl md:text-3xl font-bold mb-3">核心功能</h2>
+        <p class="text-base-content/60 text-sm md:text-base max-w-2xl mx-auto">
+          为创作者和 AI 爱好者打造的专业级工具
+        </p>
+      </div>
+
+      <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <!-- Feature 1: Characters -->
+        <div class="card bg-base-200/50 backdrop-blur-sm hover:bg-base-200/70 transition-colors">
+          <div class="card-body">
+            <div class="w-12 h-12 rounded-box bg-primary/10 flex items-center justify-center mb-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-primary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87"/>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+              </svg>
+            </div>
+            <h3 class="card-title text-lg">角色管理</h3>
+            <p class="text-sm text-base-content/70">
+              创建和管理多个 AI 角色，每个角色都有独特的人设、语气和记忆。
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 2: World Info -->
+        <div class="card bg-base-200/50 backdrop-blur-sm hover:bg-base-200/70 transition-colors">
+          <div class="card-body">
+            <div class="w-12 h-12 rounded-box bg-secondary/10 flex items-center justify-center mb-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-secondary" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/>
+                <path d="M2 12h20"/>
+              </svg>
+            </div>
+            <h3 class="card-title text-lg">世界信息</h3>
+            <p class="text-sm text-base-content/70">
+              构建复杂的世界观设定，让 AI 能够理解并在对话中运用这些知识。
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 3: Memory -->
+        <div class="card bg-base-200/50 backdrop-blur-sm hover:bg-base-200/70 transition-colors">
+          <div class="card-body">
+            <div class="w-12 h-12 rounded-box bg-accent/10 flex items-center justify-center mb-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
+                <polyline points="3.29 7 12 12 20.71 7"/>
+                <line x1="12" y1="22" x2="12" y2="12"/>
+              </svg>
+            </div>
+            <h3 class="card-title text-lg">记忆系统</h3>
+            <p class="text-sm text-base-content/70">
+              智能记忆管理，让 AI 能够记住重要的对话内容和事件。
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 4: Multi-model -->
+        <div class="card bg-base-200/50 backdrop-blur-sm hover:bg-base-200/70 transition-colors">
+          <div class="card-body">
+            <div class="w-12 h-12 rounded-box bg-info/10 flex items-center justify-center mb-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-info" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect width="18" height="18" x="3" y="3" rx="2"/>
+                <path d="M7 7h.01"/>
+                <path d="M17 7h.01"/>
+                <path d="M7 17h.01"/>
+                <path d="M17 17h.01"/>
+              </svg>
+            </div>
+            <h3 class="card-title text-lg">多模型支持</h3>
+            <p class="text-sm text-base-content/70">
+              支持 OpenAI、Claude、本地模型等多种 AI 后端，自由切换。
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 5: Presets -->
+        <div class="card bg-base-200/50 backdrop-blur-sm hover:bg-base-200/70 transition-colors">
+          <div class="card-body">
+            <div class="w-12 h-12 rounded-box bg-warning/10 flex items-center justify-center mb-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-warning" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+            </div>
+            <h3 class="card-title text-lg">参数预设</h3>
+            <p class="text-sm text-base-content/70">
+              保存和加载不同的模型参数配置，快速切换创作风格。
+            </p>
+          </div>
+        </div>
+
+        <!-- Feature 6: Extensions -->
+        <div class="card bg-base-200/50 backdrop-blur-sm hover:bg-base-200/70 transition-colors">
+          <div class="card-body">
+            <div class="w-12 h-12 rounded-box bg-error/10 flex items-center justify-center mb-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-error" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 3v12"/>
+                <path d="m8 11 4 4 4-4"/>
+                <path d="M8 5H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-4"/>
+              </svg>
+            </div>
+            <h3 class="card-title text-lg">扩展生态</h3>
+            <p class="text-sm text-base-content/70">
+              支持插件扩展，连接 TTS、图像生成等外部服务。
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="max-w-6xl mx-auto px-4 md:px-8 py-12 md:py-16">
+      <div class="card bg-gradient-to-r from-primary/20 via-secondary/10 to-accent/20 border border-base-300/40">
+        <div class="card-body items-center text-center py-12">
+          <h2 class="text-2xl md:text-3xl font-bold mb-2">准备好开始冒险了吗？</h2>
+          <p class="text-base-content/70 mb-6 max-w-md">
+            加入 Celestia 酒馆，开启你的 AI 创作之旅
+          </p>
+          <div class="flex flex-wrap gap-3 justify-center">
+            <a href="/playground.html" class="btn btn-primary btn-lg">
+              进入酒馆
+            </a>
+            <a href="https://github.com" target="_blank" class="btn btn-outline btn-lg">
+              <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+              GitHub
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer footer-center p-6 bg-base-200/50 text-base-content border-t border-base-300/40">
+    <aside>
+      <div class="flex items-center gap-2 mb-2">
+        <img src="/logo.png" alt="Celestia" class="w-6 h-6 rounded">
+        <span class="font-semibold">Celestia</span>
+      </div>
+      <p class="text-sm text-base-content/60">
+        AI 魔法酒馆 · 为创作者打造的 LLM Playground
+      </p>
+      <p class="text-xs text-base-content/40 mt-2">
+        © 2024 Celestia. 以开源精神构建。
+      </p>
+    </aside>
+  </footer>
+</body>
+
+</html>
