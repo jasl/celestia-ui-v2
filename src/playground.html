@@ -229,6 +229,44 @@
 
             <!-- Input Area -->
             <footer class="shrink-0 border-t border-base-300/40 bg-base-100/80 backdrop-blur-md px-3 md:px-6 py-3">
+              <!-- Quick Replies -->
+              <div class="mb-3" data-controller="quick-replies">
+                <div class="flex items-start gap-2">
+                  <!-- Replies Container -->
+                  <div class="flex-1 space-y-1 overflow-hidden transition-all duration-300" 
+                       data-quick-replies-target="container"
+                       style="max-height: 7.5rem;">
+                    <button class="btn btn-sm btn-ghost btn-block justify-center font-normal text-base-content/80 hover:text-base-content hover:bg-base-200/60">
+                      继续
+                    </button>
+                    <button class="btn btn-sm btn-ghost btn-block justify-center font-normal text-base-content/80 hover:text-base-content hover:bg-base-200/60">
+                      这真是个有趣的故事，能告诉我更多细节吗？
+                    </button>
+                    <button class="btn btn-sm btn-ghost btn-block justify-center font-normal text-base-content/80 hover:text-base-content hover:bg-base-200/60">
+                      *环顾四周，试图找到那块神秘的水晶*
+                    </button>
+                    <button class="btn btn-sm btn-ghost btn-block justify-center font-normal text-base-content/80 hover:text-base-content hover:bg-base-200/60 hidden" data-quick-replies-target="extra">
+                      塞拉斯现在在哪里？
+                    </button>
+                    <button class="btn btn-sm btn-ghost btn-block justify-center font-normal text-base-content/80 hover:text-base-content hover:bg-base-200/60 hidden" data-quick-replies-target="extra">
+                      我想点一杯酒，这里有什么推荐的吗？
+                    </button>
+                    <button class="btn btn-sm btn-ghost btn-block justify-center font-normal text-base-content/80 hover:text-base-content hover:bg-base-200/60 hidden" data-quick-replies-target="extra">
+                      *从背包里掏出一本古老的日记* 你看看这个，有没有见过类似的符文？
+                    </button>
+                  </div>
+                  <!-- Expand/Collapse Toggle -->
+                  <button class="btn btn-ghost btn-sm btn-square shrink-0 opacity-60 hover:opacity-100" 
+                          data-action="click->quick-replies#toggle"
+                          data-quick-replies-target="toggleBtn"
+                          title="展开更多">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 transition-transform duration-300" data-quick-replies-target="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="m6 9 6 6 6-6"/>
+                    </svg>
+                  </button>
+                </div>
+              </div>
+
               <!-- Quick actions -->
               <div class="flex flex-wrap gap-2 mb-3">
                 <button class="btn btn-xs btn-ghost rounded-full gap-1">
