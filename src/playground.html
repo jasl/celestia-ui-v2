@@ -51,10 +51,10 @@
         <div class="drawer-content flex flex-col h-full min-h-0 overflow-hidden">
           
           <!-- Top Navbar -->
-          <header class="navbar h-14 min-h-14 px-2 md:px-4 bg-base-100/80 backdrop-blur-md border-b border-base-300/40 shrink-0 relative z-[100]">
+          <header class="navbar h-14 min-h-14 px-2 md:px-4 bg-base-100/80 backdrop-blur-md border-b border-base-300/40 shrink-0 relative z-100">
             <div class="navbar-start gap-2">
               <!-- Mobile: Left drawer toggle -->
-              <label for="left-drawer" class="btn btn-ghost btn-sm btn-square lg:hidden" aria-label="打开角色面板">
+              <label for="left-drawer" class="btn btn-ghost btn-sm btn-circle lg:hidden" aria-label="打开角色面板">
                 <span class="icon-[lucide--panel-left] size-5"></span>
               </label>
               
@@ -69,7 +69,7 @@
                 <span class="truncate text-sm font-medium max-w-32 sm:max-w-48 md:max-w-64">
                   艾丽西亚的魔法小屋
                 </span>
-                <button class="btn btn-ghost btn-xs btn-square opacity-50 hover:opacity-100">
+                <button class="btn btn-ghost btn-xs btn-circle opacity-50 hover:opacity-100">
                   <span class="icon-[lucide--pencil] size-3.5"></span>
                 </button>
               </div>
@@ -93,12 +93,12 @@
 
             <div class="navbar-end gap-1">
               <!-- New chat button -->
-              <button class="btn btn-ghost btn-sm btn-square" title="新对话">
+              <button class="btn btn-ghost btn-sm btn-circle" title="新对话">
                 <span class="icon-[lucide--plus] size-5"></span>
               </button>
               
               <!-- Theme toggle -->
-              <label class="swap swap-rotate btn btn-ghost btn-sm btn-square" data-controller="theme">
+              <label class="swap swap-rotate btn btn-ghost btn-sm btn-circle" data-controller="theme">
                 <input type="checkbox" class="theme-controller" value="celestia-night"
                        data-theme-target="checkbox" data-action="change->theme#toggle">
                 <span class="icon-[lucide--sun] swap-off size-5"></span>
@@ -106,25 +106,33 @@
               </label>
               
               <!-- Mobile: Right drawer toggle -->
-              <label for="right-drawer" class="btn btn-ghost btn-sm btn-square xl:hidden" aria-label="打开设置面板">
+              <label for="right-drawer" class="btn btn-ghost btn-sm btn-circle xl:hidden" aria-label="打开设置面板">
                 <span class="icon-[lucide--settings] size-5"></span>
               </label>
               
               <!-- User menu -->
-              <div class="dropdown dropdown-end z-[100]">
+              <div class="dropdown dropdown-end z-100">
                 <div tabindex="0" role="button" class="avatar placeholder">
-                  <div class="w-8 rounded-full bg-gradient-to-tr from-primary to-secondary text-primary-content">
+                  <div class="w-8 rounded-full bg-linear-to-tr from-primary to-secondary text-primary-content">
                     <span class="text-sm">U</span>
                   </div>
                 </div>
-                <ul tabindex="0" class="dropdown-content menu menu-sm mt-3 w-52 rounded-box bg-base-200/95 backdrop-blur-md shadow-lg z-[100]">
+                <ul tabindex="0" class="dropdown-content menu menu-sm mt-3 w-52 rounded-box bg-base-200/95 backdrop-blur-md shadow-xl z-100">
                   <li class="menu-title text-xs">当前用户</li>
                   <li><span class="font-medium">@storyteller</span></li>
-                  <li><hr class="border-base-content/10 my-1"></li>
+                  <li class="pointer-events-none">
+                    <div class="menu-title px-2 py-1">
+                      <div class="h-px w-full bg-base-content/10"></div>
+                    </div>
+                  </li>
                   <li><a href="#">个人资料</a></li>
                   <li><a href="#">设置</a></li>
                   <li><a href="#">历史对话</a></li>
-                  <li><hr class="border-base-content/10 my-1"></li>
+                  <li class="pointer-events-none">
+                    <div class="menu-title px-2 py-1">
+                      <div class="h-px w-full bg-base-content/10"></div>
+                    </div>
+                  </li>
                   <li><a href="/" class="text-error">退出登录</a></li>
                 </ul>
               </div>
@@ -250,7 +258,7 @@
                     </button>
                   </div>
                   <!-- Expand/Collapse Toggle -->
-                  <button class="btn btn-ghost btn-sm btn-square shrink-0 opacity-60 hover:opacity-100" 
+                  <button class="btn btn-ghost btn-sm btn-circle shrink-0 opacity-60 hover:opacity-100" 
                           data-action="click->quick-replies#toggle"
                           data-quick-replies-target="toggleBtn"
                           title="展开更多">
@@ -289,11 +297,11 @@
                     data-playground-target="input"
                     data-action="keydown->playground#handleKeydown"
                   ></textarea>
-                  <button class="btn btn-ghost btn-xs btn-square absolute right-2 bottom-2 opacity-50 hover:opacity-100" title="添加附件">
+                  <button class="btn btn-ghost btn-xs btn-circle absolute right-2 bottom-2 opacity-50 hover:opacity-100" title="添加附件">
                     <span class="icon-[lucide--paperclip] size-4"></span>
                   </button>
                 </div>
-                <button class="btn btn-primary btn-square" data-action="click->playground#send" data-playground-target="sendButton">
+                <button class="btn btn-primary btn-circle" data-action="click->playground#send" data-playground-target="sendButton">
                   <span class="icon-[lucide--send] size-5"></span>
                 </button>
               </div>
@@ -314,7 +322,7 @@
         </div>
 
         <!-- Right Drawer Side (Settings Panel) -->
-        <div class="drawer-side z-[105]">
+        <div class="drawer-side z-105">
           <label for="right-drawer" aria-label="关闭设置面板" class="drawer-overlay"></label>
           <aside class="w-80 h-full bg-base-200/95 backdrop-blur-md border-l border-base-300/40 flex flex-col">
             <!-- Header -->
@@ -322,7 +330,7 @@
               <span class="font-medium">参数设置</span>
               <div class="flex items-center gap-1">
                 <button class="btn btn-ghost btn-xs">保存预设</button>
-                <label for="right-drawer" class="btn btn-ghost btn-xs btn-square xl:hidden">
+                <label for="right-drawer" class="btn btn-ghost btn-xs btn-circle xl:hidden">
                   <span class="icon-[lucide--x] size-4"></span>
                 </label>
               </div>
@@ -418,7 +426,7 @@
     </div>
 
     <!-- Left Drawer Side (Characters/Scenes/Memory Panel) -->
-    <div class="drawer-side z-[110]">
+    <div class="drawer-side z-110">
       <label for="left-drawer" aria-label="关闭角色面板" class="drawer-overlay"></label>
       <aside class="w-72 xl:w-80 h-full bg-base-200/95 backdrop-blur-md border-r border-base-300/40 flex flex-col">
         <!-- Header -->
@@ -428,7 +436,7 @@
             <div class="font-semibold text-sm leading-tight truncate">Celestia</div>
             <div class="text-xs text-base-content/60">AI 酒馆 · Playground</div>
           </div>
-          <label for="left-drawer" class="btn btn-ghost btn-xs btn-square lg:hidden">
+          <label for="left-drawer" class="btn btn-ghost btn-xs btn-circle lg:hidden">
             <span class="icon-[lucide--x] size-4"></span>
           </label>
         </div>
@@ -524,7 +532,7 @@
             </div>
             <ul class="list bg-transparent px-3">
               <li class="list-row hover:bg-base-300/50 cursor-pointer bg-base-300/30 rounded-box">
-                <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-primary/20 to-secondary/20 flex items-center justify-center shrink-0">
+                <div class="w-10 h-10 rounded-lg bg-linear-to-br from-primary/20 to-secondary/20 flex items-center justify-center shrink-0">
                   <span class="icon-[lucide--home] size-5 opacity-70"></span>
                 </div>
                 <div class="flex-1 min-w-0">

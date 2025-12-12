@@ -37,7 +37,7 @@
 
 <body class="min-h-dvh bg-base-100">
   <!-- Background gradient overlay -->
-  <div class="fixed inset-0 bg-gradient-to-br from-primary/10 via-secondary/5 to-accent/10 pointer-events-none"></div>
+  <div class="fixed inset-0 bg-linear-to-br from-primary/10 via-secondary/5 to-accent/10 pointer-events-none"></div>
 
   <!-- Top Navigation -->
   <nav class="navbar sticky top-0 z-50 h-14 px-4 md:px-8 bg-base-100/80 backdrop-blur-md border-b border-base-300/40">
@@ -70,11 +70,15 @@
         <div tabindex="0" role="button" class="btn btn-ghost btn-sm btn-circle">
           <span class="icon-[lucide--menu] size-5"></span>
         </div>
-        <ul tabindex="0" class="dropdown-content menu menu-sm mt-3 w-52 rounded-box bg-base-200/95 backdrop-blur-md shadow-lg z-50">
+        <ul tabindex="0" class="dropdown-content menu menu-sm mt-3 w-52 rounded-box bg-base-200/95 backdrop-blur-md shadow-xl z-50">
           <li><a href="/">首页</a></li>
           <li><a href="/playground.html">开始对话</a></li>
           <li><a href="#features">功能特性</a></li>
-          <li><hr class="border-base-content/10 my-1"></li>
+          <li class="pointer-events-none">
+            <div class="menu-title px-2 py-1">
+              <div class="h-px w-full bg-base-content/10"></div>
+            </div>
+          </li>
           <li><a href="/login.html">登录</a></li>
         </ul>
       </div>
@@ -103,7 +107,7 @@
             
             <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold leading-tight">
               织造你的<br>
-              <span class="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">幻想世界</span>
+              <span class="bg-linear-to-r from-primary to-secondary bg-clip-text text-transparent">幻想世界</span>
             </h1>
             
             <p class="text-base-content/70 text-sm md:text-base max-w-xl">
@@ -126,7 +130,7 @@
 
           <!-- Right: Preview mockup -->
           <div class="mt-10 lg:mt-0 lg:w-2/5">
-            <div class="mockup-window border border-base-300/60 bg-base-300/40 shadow-lg">
+            <div class="mockup-window border border-base-300/60 bg-base-300/40 shadow-xl">
               <div class="flex flex-col px-4 py-4 gap-y-3 bg-base-100/50">
                 <div class="chat chat-start">
                   <div class="chat-image avatar placeholder">
@@ -255,7 +259,7 @@
 
     <!-- CTA Section -->
     <section class="max-w-6xl mx-auto px-4 md:px-8 py-12 md:py-16">
-      <div class="card bg-gradient-to-r from-primary/20 via-secondary/10 to-accent/20 border border-base-300/40">
+      <div class="card bg-linear-to-r from-primary/20 via-secondary/10 to-accent/20 border border-base-300/40">
         <div class="card-body items-center text-center py-12">
           <h2 class="text-2xl md:text-3xl font-bold mb-2">准备好开始冒险了吗？</h2>
           <p class="text-base-content/70 mb-6 max-w-md">
