@@ -120,19 +120,11 @@
                 <ul tabindex="0" class="dropdown-content menu menu-sm mt-3 w-52 rounded-box bg-base-200/95 backdrop-blur-md shadow-xl">
                   <li class="menu-title text-xs">当前用户</li>
                   <li><span class="font-medium">@storyteller</span></li>
-                  <li class="pointer-events-none">
-                    <div class="menu-title px-2 py-1">
-                      <div class="h-px w-full bg-base-content/10"></div>
-                    </div>
-                  </li>
+                  <li class="divide-y my-2"></li>
                   <li><a href="#">个人资料</a></li>
                   <li><a href="#">设置</a></li>
                   <li><a href="#">历史对话</a></li>
-                  <li class="pointer-events-none">
-                    <div class="menu-title px-2 py-1">
-                      <div class="h-px w-full bg-base-content/10"></div>
-                    </div>
-                  </li>
+                  <li class="divide-y my-2"></li>
                   <li><a href="/" class="text-error">退出登录</a></li>
                 </ul>
               </div>
@@ -217,7 +209,7 @@
               </div>
 
               <!-- Typing indicator -->
-              <div class="chat chat-start" data-playground-target="typingIndicator" style="display: none;">
+              <div class="chat chat-start hidden" data-playground-target="typingIndicator">
                 <div class="chat-image avatar placeholder">
                   <div class="w-10 rounded-full bg-secondary text-secondary-content">
                     <span>艾</span>
@@ -235,9 +227,8 @@
               <div class="mb-3" data-controller="quick-replies">
                 <div class="flex items-start gap-2">
                   <!-- Replies Container -->
-                  <div class="flex-1 flex flex-col gap-y-1 overflow-hidden transition-all duration-300 [&>button]:justify-center [&>button]:font-normal [&>button]:text-base-content/80 [&>button:hover]:text-base-content [&>button:hover]:bg-base-200/60" 
-                       data-quick-replies-target="container"
-                       style="max-height: 7.5rem;">
+                  <div class="flex-1 flex flex-col gap-y-1 overflow-hidden transition-all duration-300 max-h-[7.5rem] [&>button]:justify-center [&>button]:font-normal [&>button]:text-base-content/80 [&>button:hover]:text-base-content [&>button:hover]:bg-base-200/60" 
+                       data-quick-replies-target="container">
                     <button class="btn btn-sm btn-ghost btn-block">
                       继续
                     </button>

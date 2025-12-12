@@ -177,7 +177,7 @@ export default class extends Controller {
     if (this.hasTypingIndicatorTarget) {
       // Move typing indicator to end of messages container
       this.messagesTarget.appendChild(this.typingIndicatorTarget)
-      this.typingIndicatorTarget.style.display = ""
+      this.typingIndicatorTarget.classList.remove("hidden")
       this.scrollToBottom()
     }
   }
@@ -187,7 +187,7 @@ export default class extends Controller {
    */
   hideTypingIndicator() {
     if (this.hasTypingIndicatorTarget) {
-      this.typingIndicatorTarget.style.display = "none"
+      this.typingIndicatorTarget.classList.add("hidden")
     }
   }
 
