@@ -51,7 +51,7 @@
         <div class="drawer-content flex flex-col h-full min-h-0 overflow-hidden">
           
           <!-- Top Navbar -->
-          <header class="navbar h-14 min-h-14 px-2 md:px-4 bg-base-100/80 backdrop-blur-md border-b border-base-300/40 shrink-0 relative z-100">
+          <header class="navbar h-14 min-h-14 px-2 md:px-4 bg-base-100/80 backdrop-blur-md border-b border-base-300/40 shrink-0 relative z-40">
             <div class="navbar-start gap-2">
               <!-- Mobile: Left drawer toggle -->
               <label for="left-drawer" class="btn btn-ghost btn-sm btn-circle lg:hidden" aria-label="打开角色面板">
@@ -111,13 +111,13 @@
               </label>
               
               <!-- User menu -->
-              <div class="dropdown dropdown-end z-100">
+              <div class="dropdown dropdown-end">
                 <div tabindex="0" role="button" class="avatar placeholder">
                   <div class="w-8 rounded-full bg-linear-to-tr from-primary to-secondary text-primary-content">
                     <span class="text-sm">U</span>
                   </div>
                 </div>
-                <ul tabindex="0" class="dropdown-content menu menu-sm mt-3 w-52 rounded-box bg-base-200/95 backdrop-blur-md shadow-xl z-100">
+                <ul tabindex="0" class="dropdown-content menu menu-sm mt-3 w-52 rounded-box bg-base-200/95 backdrop-blur-md shadow-xl">
                   <li class="menu-title text-xs">当前用户</li>
                   <li><span class="font-medium">@storyteller</span></li>
                   <li class="pointer-events-none">
@@ -322,7 +322,7 @@
         </div>
 
         <!-- Right Drawer Side (Settings Panel) -->
-        <div class="drawer-side z-105">
+        <div class="drawer-side z-50">
           <label for="right-drawer" aria-label="关闭设置面板" class="drawer-overlay"></label>
           <aside class="w-80 h-full bg-base-200/95 backdrop-blur-md border-l border-base-300/40 flex flex-col">
             <!-- Header -->
@@ -426,7 +426,7 @@
     </div>
 
     <!-- Left Drawer Side (Characters/Scenes/Memory Panel) -->
-    <div class="drawer-side z-110">
+    <div class="drawer-side z-50">
       <label for="left-drawer" aria-label="关闭角色面板" class="drawer-overlay"></label>
       <aside class="w-72 xl:w-80 h-full bg-base-200/95 backdrop-blur-md border-r border-base-300/40 flex flex-col">
         <!-- Header -->
