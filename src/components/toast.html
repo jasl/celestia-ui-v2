@@ -1,9 +1,34 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="celestia-dawn">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        (() => {
+            const light = "celestia-dawn"
+            const dark = "celestia-night"
+
+            const prefersDark = () => {
+                try {
+                    return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+                } catch (e) {
+                    return false
+                }
+            }
+
+            let theme = light
+            try {
+                const stored = localStorage.getItem("theme")
+                theme = stored === dark || stored === light ? stored : prefersDark() ? dark : light
+            } catch (e) {
+                theme = prefersDark() ? dark : light
+            }
+
+            document.documentElement.setAttribute("data-theme", theme)
+            document.documentElement.style.colorScheme = theme === dark ? "dark" : "light"
+        })()
+    </script>
     <title>Toast Component Demo</title>
 
     <!-- Styles -->
@@ -19,7 +44,7 @@
              data-toast-auto-dismiss-value="true"
              data-toast-pause-on-hover-value="true">
             <div class="toast toast-top toast-end z-50">
-                    <div class="alert alert-success shadow-lg relative overflow-hidden!" data-toast-target="alert">
+                    <div class="alert alert-success shadow-lg relative overflow-hidden" data-toast-target="alert">
                             <span class="icon-[lucide--circle-check] size-6 shrink-0"></span>
                             <div class="flex flex-col gap-1">
                                 <span class="font-semibold">登录成功！</span>
@@ -29,8 +54,8 @@
                                 <span class="icon-[lucide--x] size-4"></span>
                             </button>
                             <!-- Progress bar -->
-                            <div class="absolute bottom-0 inset-x-0 h-1 bg-success/30 rounded-b-box">
-                                <div data-toast-target="progress" class="h-full bg-success-content/50 transition-all duration-100 ease-linear rounded-b-box" style="width: 100%"></div>
+                            <div class="absolute bottom-0 inset-x-0 h-1 bg-success/30">
+                                <div data-toast-target="progress" class="h-full bg-success-content/50 transition-all duration-100 ease-linear" style="width: 100%"></div>
                             </div>
                         </div>
             </div>
@@ -253,8 +278,8 @@
             const colors = colorMap[type] || colorMap.info;
             
             const progressHTML = showProgress ? `
-                <div class="absolute bottom-0 inset-x-0 h-1 ${colors.progressBg} rounded-b-box">
-                    <div data-toast-target="progress" class="h-full ${colors.progress} transition-all duration-100 ease-linear rounded-b-box" style="width: 100%"></div>
+                <div class="absolute bottom-0 inset-x-0 h-1 ${colors.progressBg}">
+                    <div data-toast-target="progress" class="h-full ${colors.progress} transition-all duration-100 ease-linear" style="width: 100%"></div>
                 </div>
             ` : '';
             
@@ -264,7 +289,7 @@
                      data-toast-auto-dismiss-value="${autoDismiss}"
                      data-toast-pause-on-hover-value="${pauseOnHover}">
                     <div class="toast ${position} z-50">
-                        <div class="alert ${colors.alert} shadow-lg relative overflow-hidden!" data-toast-target="alert">
+                        <div class="alert ${colors.alert} shadow-lg relative overflow-hidden" data-toast-target="alert">
                             ${icons[type]}
                             <div class="flex flex-col gap-1">
                                 <span class="font-semibold">${title}</span>

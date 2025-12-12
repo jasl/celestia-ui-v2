@@ -12,6 +12,15 @@ export default class extends Controller {
     this.scrollToBottom()
     // Initialize sending state
     this.isSending = false
+    // Track any pending simulated response so we can clean up on disconnect
+    this.aiResponseTimeoutId = null
+  }
+
+  disconnect() {
+    if (this.aiResponseTimeoutId) {
+      clearTimeout(this.aiResponseTimeoutId)
+      this.aiResponseTimeoutId = null
+    }
   }
 
   /**
@@ -31,7 +40,9 @@ export default class extends Controller {
   send() {
     // Prevent sending if already processing
     if (this.isSending) return
-    
+
+    if (!this.hasInputTarget) return
+
     const input = this.inputTarget
     const message = input.value.trim()
     
@@ -50,9 +61,11 @@ export default class extends Controller {
     this.showTypingIndicator()
     
     // Simulate AI response (in real implementation, this would call an API)
-    setTimeout(() => {
+    if (this.aiResponseTimeoutId) clearTimeout(this.aiResponseTimeoutId)
+    this.aiResponseTimeoutId = setTimeout(() => {
+      this.aiResponseTimeoutId = null
       this.hideTypingIndicator()
-      this.addAIMessage(this.generateMockResponse(message))
+      this.addAIMessage(this.generateMockResponse(message), { isHtml: true })
       // Unlock input after AI response
       this.unlockInput()
     }, 1500 + Math.random() * 1000)
@@ -114,8 +127,9 @@ export default class extends Controller {
   /**
    * Add an AI message to the chat
    */
-  addAIMessage(text) {
+  addAIMessage(text, { isHtml = false } = {}) {
     const time = this.getCurrentTime()
+    const content = isHtml ? text : this.escapeHTML(text)
     const messageHTML = `
       <div class="chat chat-start">
         <div class="chat-image avatar placeholder">
@@ -127,7 +141,7 @@ export default class extends Controller {
           <span class="font-medium">艾丽西亚</span>
           <time class="text-xs opacity-50 ml-2">${time}</time>
         </div>
-        <div class="chat-bubble chat-bubble-secondary">${text}</div>
+        <div class="chat-bubble chat-bubble-secondary">${content}</div>
         <div class="chat-footer mt-1 flex gap-1">
           <button class="btn btn-ghost btn-xs opacity-50 hover:opacity-100">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

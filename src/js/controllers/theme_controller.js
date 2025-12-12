@@ -15,8 +15,20 @@ export default class extends Controller {
    * Apply stored theme preference from localStorage
    */
   applyStoredTheme() {
-    const storedTheme = localStorage.getItem("theme")
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches
+    let storedTheme = null
+    try {
+      storedTheme = localStorage.getItem("theme")
+    } catch (e) {
+      storedTheme = null
+    }
+
+    const prefersDark = (() => {
+      try {
+        return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+      } catch (e) {
+        return false
+      }
+    })()
     
     // Determine which theme to use
     let isDark = false
@@ -32,6 +44,7 @@ export default class extends Controller {
     // Apply theme
     const theme = isDark ? "celestia-night" : "celestia-dawn"
     document.documentElement.setAttribute("data-theme", theme)
+    document.documentElement.style.colorScheme = isDark ? "dark" : "light"
     
     // Sync checkbox state if it exists
     if (this.hasCheckboxTarget) {
@@ -48,9 +61,14 @@ export default class extends Controller {
     
     // Apply theme
     document.documentElement.setAttribute("data-theme", theme)
+    document.documentElement.style.colorScheme = isDark ? "dark" : "light"
     
     // Store preference
-    localStorage.setItem("theme", theme)
+    try {
+      localStorage.setItem("theme", theme)
+    } catch (e) {
+      // localStorage might be unavailable
+    }
     
     // Sync all theme controllers on the page
     this.syncAllThemeCheckboxes(isDark)
@@ -60,10 +78,12 @@ export default class extends Controller {
    * Sync all theme checkboxes across the page
    */
   syncAllThemeCheckboxes(isDark) {
-    document.querySelectorAll('.theme-controller').forEach(checkbox => {
-      if (checkbox !== this.checkboxTarget) {
-        checkbox.checked = isDark
-      }
+    const currentCheckbox = this.hasCheckboxTarget ? this.checkboxTarget : null
+
+    // Sync only our theme toggle checkboxes (avoid accidentally toggling other theme-controller inputs in demos)
+    document.querySelectorAll('input[data-theme-target="checkbox"]').forEach((checkbox) => {
+      if (currentCheckbox && checkbox === currentCheckbox) return
+      checkbox.checked = isDark
     })
   }
 }

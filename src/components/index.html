@@ -1,9 +1,34 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="celestia-dawn">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+        (() => {
+            const light = "celestia-dawn"
+            const dark = "celestia-night"
+
+            const prefersDark = () => {
+                try {
+                    return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+                } catch (e) {
+                    return false
+                }
+            }
+
+            let theme = light
+            try {
+                const stored = localStorage.getItem("theme")
+                theme = stored === dark || stored === light ? stored : prefersDark() ? dark : light
+            } catch (e) {
+                theme = prefersDark() ? dark : light
+            }
+
+            document.documentElement.setAttribute("data-theme", theme)
+            document.documentElement.style.colorScheme = theme === dark ? "dark" : "light"
+        })()
+    </script>
     <title>Components</title>
 
     <!-- Styles -->
@@ -17,21 +42,16 @@
                 <div class="text-base-content pt-6 transition-colors duration-500 bg-base-200">
                     <div class="flex items-center justify-between gap-4 px-8 ps-10">
                         <h2 class="font-title text-lg md:max-lg:hidden">Components Demo</h2>
-                        <div class="tabs tabs-box tabs-sm bg-base-300 inline-flex">
-                            <label class="tab" title="Components Demo">
-                                <input aria-label="Components Demo" name="previewtabs" type="radio"
-                                    value="Components Demo">
+                        <div class="tabs tabs-box tabs-sm bg-base-300 inline-flex" role="tablist" aria-label="Components pages">
+                            <a class="tab tab-active" href="./index.html" title="Components Demo" aria-label="Components Demo">
                                 <span class="icon-[lucide--layout-dashboard] size-4"></span>
-                            </label>
-                            <label class="tab" title="Component Variants">
-                                <input aria-label="Component Variants" name="previewtabs" type="radio"
-                                    value="Component Variants">
+                            </a>
+                            <a class="tab" href="./variants.html" title="Component Variants" aria-label="Component Variants">
                                 <span class="icon-[lucide--columns-2] size-4"></span>
-                            </label>
-                            <label class="tab" title="Color Palette">
-                                <input aria-label="Color Palette" name="previewtabs" type="radio" value="Color Palette">
+                            </a>
+                            <a class="tab" href="./palette.html" title="Color Palette" aria-label="Color Palette">
                                 <span class="icon-[lucide--palette] size-4"></span>
-                            </label>
+                            </a>
                         </div>
                     </div>
                     <div class="px-8 py-6">

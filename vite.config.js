@@ -1,5 +1,5 @@
 import { defineConfig } from "vite"
-import { resolve } from "node:path"
+import { resolve, relative } from "node:path"
 import fs from "node:fs"
 import tailwindcss from "@tailwindcss/vite"
 
@@ -13,7 +13,9 @@ const getHtmlFiles = (dir) => {
     list.forEach((file) => {
         const filePath = resolve(dir, file)
         const stat = fs.statSync(filePath)
-        if (stat && stat.isFile() && file.endsWith(".html")) {
+        if (stat && stat.isDirectory()) {
+            results = results.concat(getHtmlFiles(filePath))
+        } else if (stat && stat.isFile() && file.endsWith(".html")) {
             results.push(filePath)
         }
     })
@@ -22,10 +24,11 @@ const getHtmlFiles = (dir) => {
 
 const htmlFiles = getHtmlFiles(srcDir)
 const input = Object.fromEntries(
-    htmlFiles.map((file) => [
-        file.split('/').pop().replace('.html', ''),
-        file
-    ])
+    htmlFiles.map((file) => {
+        const rel = relative(srcDir, file).split("\\").join("/")
+        const name = rel.replace(".html", "").split("/").join("-")
+        return [name, file]
+    })
 )
 
 export default defineConfig({

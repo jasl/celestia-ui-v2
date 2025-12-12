@@ -10,6 +10,14 @@ export default class extends Controller {
   connect() {
     this.expanded = false
     this.collapsedHeight = "7.5rem" // Show ~3 items
+    this.hideExtrasTimeoutId = null
+  }
+
+  disconnect() {
+    if (this.hideExtrasTimeoutId) {
+      clearTimeout(this.hideExtrasTimeoutId)
+      this.hideExtrasTimeoutId = null
+    }
   }
 
   toggle() {
@@ -23,6 +31,12 @@ export default class extends Controller {
   }
 
   expand() {
+    // Cancel any pending hide so we don't "collapse" after expanding
+    if (this.hideExtrasTimeoutId) {
+      clearTimeout(this.hideExtrasTimeoutId)
+      this.hideExtrasTimeoutId = null
+    }
+
     // Show extra items
     this.extraTargets.forEach(el => el.classList.remove("hidden"))
     
@@ -49,8 +63,10 @@ export default class extends Controller {
     }
     
     // Hide extra items after animation
-    setTimeout(() => {
+    if (this.hideExtrasTimeoutId) clearTimeout(this.hideExtrasTimeoutId)
+    this.hideExtrasTimeoutId = setTimeout(() => {
       this.extraTargets.forEach(el => el.classList.add("hidden"))
+      this.hideExtrasTimeoutId = null
     }, 300)
     
     // Reset icon rotation
@@ -64,4 +80,5 @@ export default class extends Controller {
     }
   }
 }
+
 

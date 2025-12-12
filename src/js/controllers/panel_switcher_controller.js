@@ -1,5 +1,11 @@
 import { Controller } from "@hotwired/stimulus"
 
+let panel_switcher_instance_counter = 0
+
+function to_safe_dom_id(value) {
+  return String(value).trim().replace(/[^a-zA-Z0-9_-]/g, "-")
+}
+
 /**
  * Panel Switcher Controller
  * A universal panel switching component for cases where tabs and panels need to be separated.
@@ -31,13 +37,26 @@ export default class extends Controller {
   }
 
   connect() {
+    // A stable-ish per-instance id prefix for generated ARIA ids (avoids collisions across multiple instances)
+    this.instanceId = this.element.id ? to_safe_dom_id(this.element.id) : `panel-switcher-${++panel_switcher_instance_counter}`
+
+    // Ensure tabs/panels have consistent ARIA wiring (controls/labelledby/roles)
+    this.setupAria()
+
+    // Keyboard support: arrow keys + Home/End on tabs
+    this.boundHandleKeydown = this.handleKeydown.bind(this)
+    this.tabTargets.forEach((tab) => tab.addEventListener("keydown", this.boundHandleKeydown))
+
     // Check if there's already an active tab (server-side rendered state)
     const activeTab = this.tabTargets.find(tab => tab.classList.contains(this.activeClassValue))
     
     if (activeTab) {
       // Server has pre-rendered active state, ensure panels are in sync
       const panelId = this.getPanelId(activeTab)
-      if (panelId) this.showPanel(panelId)
+      if (panelId) {
+        this.updateTabs(panelId)
+        this.showPanel(panelId)
+      }
     } else if (this.hasDefaultValue && this.defaultValue) {
       // Use the default value from data attribute
       this.show(this.defaultValue)
@@ -46,6 +65,45 @@ export default class extends Controller {
       const firstPanelId = this.getPanelId(this.tabTargets[0])
       if (firstPanelId) this.show(firstPanelId)
     }
+  }
+
+  disconnect() {
+    if (this.boundHandleKeydown) {
+      this.tabTargets.forEach((tab) => tab.removeEventListener("keydown", this.boundHandleKeydown))
+    }
+  }
+
+  /**
+   * Keyboard navigation for tabs (arrow keys + Home/End)
+   */
+  handleKeydown(event) {
+    const keys = new Set(["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Home", "End"])
+    if (!keys.has(event.key)) return
+
+    const tabs = this.tabTargets
+    if (tabs.length === 0) return
+
+    const currentIndex = tabs.indexOf(event.currentTarget)
+    if (currentIndex === -1) return
+
+    let nextIndex = currentIndex
+
+    if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+      nextIndex = (currentIndex - 1 + tabs.length) % tabs.length
+    } else if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+      nextIndex = (currentIndex + 1) % tabs.length
+    } else if (event.key === "Home") {
+      nextIndex = 0
+    } else if (event.key === "End") {
+      nextIndex = tabs.length - 1
+    }
+
+    event.preventDefault()
+    const nextTab = tabs[nextIndex]
+    nextTab.focus()
+
+    const panelId = this.getPanelId(nextTab)
+    if (panelId) this.show(panelId)
   }
 
   /**
@@ -79,9 +137,11 @@ export default class extends Controller {
       if (panelId === activePanelId) {
         tab.classList.add(this.activeClassValue)
         tab.setAttribute("aria-selected", "true")
+        tab.setAttribute("tabindex", "0")
       } else {
         tab.classList.remove(this.activeClassValue)
         tab.setAttribute("aria-selected", "false")
+        tab.setAttribute("tabindex", "-1")
       }
     })
   }
@@ -95,9 +155,11 @@ export default class extends Controller {
       const id = panel.dataset.panelSwitcherId
       if (id === panelId) {
         panel.classList.remove(this.hiddenClassValue)
+        panel.hidden = false
         panel.setAttribute("aria-hidden", "false")
       } else {
         panel.classList.add(this.hiddenClassValue)
+        panel.hidden = true
         panel.setAttribute("aria-hidden", "true")
       }
     })
@@ -120,5 +182,37 @@ export default class extends Controller {
   get activePanelId() {
     const activeTab = this.tabTargets.find(tab => tab.classList.contains(this.activeClassValue))
     return activeTab ? this.getPanelId(activeTab) : null
+  }
+
+  /**
+   * Ensure WAI-ARIA tabs wiring is correct, even when markup is server-rendered.
+   */
+  setupAria() {
+    const panelById = new Map()
+    this.panelTargets.forEach((panel) => {
+      const panelId = panel.dataset.panelSwitcherId
+      if (!panelId) return
+      panelById.set(panelId, panel)
+    })
+
+    this.tabTargets.forEach((tab) => {
+      const panelId = this.getPanelId(tab)
+      if (!panelId) return
+
+      // Roles
+      tab.setAttribute("role", "tab")
+
+      const panel = panelById.get(panelId)
+      if (!panel) return
+
+      panel.setAttribute("role", "tabpanel")
+
+      // IDs + relationships
+      if (!tab.id) tab.id = `${this.instanceId}-tab-${to_safe_dom_id(panelId)}`
+      if (!panel.id) panel.id = `${this.instanceId}-panel-${to_safe_dom_id(panelId)}`
+
+      tab.setAttribute("aria-controls", panel.id)
+      panel.setAttribute("aria-labelledby", tab.id)
+    })
   }
 }

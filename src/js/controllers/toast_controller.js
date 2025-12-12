@@ -41,6 +41,7 @@ export default class extends Controller {
     // Store bound event handlers for proper cleanup
     this.boundPause = this.pause.bind(this)
     this.boundResume = this.resume.bind(this)
+    this.hoverElement = null
 
     // Show the toast with animation
     this.show()
@@ -51,8 +52,10 @@ export default class extends Controller {
       
       // Setup pause on hover if enabled
       if (this.pauseOnHoverValue) {
-        this.element.addEventListener("mouseenter", this.boundPause)
-        this.element.addEventListener("mouseleave", this.boundResume)
+        // Use the visible element for hover events (the controller root can be 0×0 if it only contains a fixed toast)
+        this.hoverElement = this.getAnimatedElement()
+        this.hoverElement.addEventListener("mouseenter", this.boundPause)
+        this.hoverElement.addEventListener("mouseleave", this.boundResume)
       }
     }
   }
@@ -61,36 +64,45 @@ export default class extends Controller {
     this.clearTimers()
     
     // Remove event listeners using stored bound references
-    if (this.pauseOnHoverValue) {
-      this.element.removeEventListener("mouseenter", this.boundPause)
-      this.element.removeEventListener("mouseleave", this.boundResume)
+    if (this.pauseOnHoverValue && this.hoverElement) {
+      this.hoverElement.removeEventListener("mouseenter", this.boundPause)
+      this.hoverElement.removeEventListener("mouseleave", this.boundResume)
+      this.hoverElement = null
     }
   }
 
   show() {
+    const el = this.getAnimatedElement()
+    const enterTransform = this.getEnterTransform()
+
     // Add entrance animation
-    this.element.style.opacity = "0"
-    this.element.style.transform = "translateX(100%)"
+    el.style.transition = "none"
+    el.style.willChange = "opacity, transform"
+    el.style.opacity = "0"
+    el.style.transform = enterTransform
     
     requestAnimationFrame(() => {
-      this.element.style.transition = "opacity 300ms ease-out, transform 300ms ease-out"
-      this.element.style.opacity = "1"
-      this.element.style.transform = "translateX(0)"
+      el.style.transition = "opacity 300ms ease-out, transform 300ms ease-out"
+      el.style.opacity = "1"
+      el.style.transform = "translate3d(0, 0, 0)"
     })
   }
 
   dismiss() {
     this.clearTimers()
+
+    const el = this.getAnimatedElement()
+    const exitTransform = this.getEnterTransform()
     
     // Add exit animation
-    this.element.style.transition = "opacity 200ms ease-in, transform 200ms ease-in"
-    this.element.style.opacity = "0"
-    this.element.style.transform = "translateX(100%)"
-    
-    // Remove element after animation
-    setTimeout(() => {
-      this.element.remove()
-    }, 200)
+    el.style.transition = "opacity 200ms ease-in, transform 200ms ease-in"
+    el.style.opacity = "0"
+    el.style.transform = exitTransform
+
+    // Remove element after animation (transitionend is more reliable than a fixed timeout)
+    const remove = () => this.element.remove()
+    el.addEventListener("transitionend", remove, { once: true })
+    setTimeout(remove, 250)
   }
 
   startCountdown() {
@@ -144,5 +156,31 @@ export default class extends Controller {
       cancelAnimationFrame(this.animationFrameId)
       this.animationFrameId = null
     }
+  }
+
+  /**
+   * The element we animate and bind hover events to.
+   * Animating the controller root can break `position: fixed` descendants (like daisyUI `.toast`).
+   */
+  getAnimatedElement() {
+    return this.hasAlertTarget ? this.alertTarget : this.element
+  }
+
+  /**
+   * Determine the entry/exit transform based on toast placement classes.
+   */
+  getEnterTransform() {
+    const toast = this.element.querySelector(".toast")
+    if (!toast) return "translateX(120%)"
+
+    if (toast.classList.contains("toast-start")) return "translateX(-120%)"
+
+    if (toast.classList.contains("toast-center")) {
+      if (toast.classList.contains("toast-bottom")) return "translateY(120%)"
+      return "translateY(-120%)"
+    }
+
+    // default: toast-end
+    return "translateX(120%)"
   }
 }
