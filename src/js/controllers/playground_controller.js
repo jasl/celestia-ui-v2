@@ -110,9 +110,9 @@ export default class extends Controller {
           <span class="font-medium">你</span>
         </div>
         <div class="chat-bubble chat-bubble-primary">${this.escapeHTML(text)}</div>
-        <div class="chat-footer mt-1 flex gap-1 justify-end">
-          <button class="btn btn-ghost btn-xs opacity-50 hover:opacity-100">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <div class="chat-footer mt-1 flex gap-1 justify-end [&>button]:opacity-50 [&>button:hover]:opacity-100">
+          <button class="btn btn-ghost btn-xs">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
             </svg>
           </button>
@@ -142,20 +142,20 @@ export default class extends Controller {
           <time class="text-xs opacity-50 ml-2">${time}</time>
         </div>
         <div class="chat-bubble chat-bubble-secondary">${content}</div>
-        <div class="chat-footer mt-1 flex gap-1">
-          <button class="btn btn-ghost btn-xs opacity-50 hover:opacity-100">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <div class="chat-footer mt-1 flex gap-1 [&>button]:opacity-50 [&>button:hover]:opacity-100">
+          <button class="btn btn-ghost btn-xs">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/>
             </svg>
           </button>
-          <button class="btn btn-ghost btn-xs opacity-50 hover:opacity-100">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <button class="btn btn-ghost btn-xs">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <rect width="14" height="14" x="8" y="8" rx="2" ry="2"/>
               <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"/>
             </svg>
           </button>
-          <button class="btn btn-ghost btn-xs opacity-50 hover:opacity-100">
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <button class="btn btn-ghost btn-xs">
+            <svg xmlns="http://www.w3.org/2000/svg" class="size-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8"/>
               <path d="M21 3v5h-5"/>
               <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16"/>

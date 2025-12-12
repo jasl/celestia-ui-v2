@@ -85,7 +85,7 @@
                   <option>Gemini Pro</option>
                 </select>
                 <div class="badge badge-outline badge-success badge-sm gap-1">
-                  <span class="w-1.5 h-1.5 rounded-full bg-success animate-pulse"></span>
+                  <span class="size-1.5 rounded-full bg-success animate-pulse"></span>
                   已连接
                 </div>
               </div>
@@ -159,14 +159,14 @@
                   <p class="mt-2">我是艾丽西亚，魔法学徒的导师。在这里，我们可以一起编织故事、探索幻想世界，或者只是聊聊天。</p>
                   <p class="mt-2">今晚想从哪里开始呢？</p>
                 </div>
-                <div class="chat-footer mt-1 flex gap-1">
-                  <button class="btn btn-ghost btn-xs opacity-50 hover:opacity-100">
+                <div class="chat-footer mt-1 flex gap-1 [&>button]:opacity-50 [&>button:hover]:opacity-100">
+                  <button class="btn btn-ghost btn-xs">
                     <span class="icon-[lucide--pencil] size-3.5"></span>
                   </button>
-                  <button class="btn btn-ghost btn-xs opacity-50 hover:opacity-100">
+                  <button class="btn btn-ghost btn-xs">
                     <span class="icon-[lucide--copy] size-3.5"></span>
                   </button>
-                  <button class="btn btn-ghost btn-xs opacity-50 hover:opacity-100">
+                  <button class="btn btn-ghost btn-xs">
                     <span class="icon-[lucide--refresh-cw] size-3.5"></span>
                   </button>
                 </div>
@@ -181,8 +181,8 @@
                 <div class="chat-bubble chat-bubble-primary">
                   我想先测试一下角色扮演的效果。能给我讲讲这个酒馆的故事吗？
                 </div>
-                <div class="chat-footer mt-1 flex gap-1 justify-end">
-                  <button class="btn btn-ghost btn-xs opacity-50 hover:opacity-100">
+                <div class="chat-footer mt-1 flex gap-1 justify-end [&>button]:opacity-50 [&>button:hover]:opacity-100">
+                  <button class="btn btn-ghost btn-xs">
                     <span class="icon-[lucide--pencil] size-3.5"></span>
                   </button>
                 </div>
@@ -227,25 +227,25 @@
               <div class="mb-3" data-controller="quick-replies">
                 <div class="flex items-start gap-2">
                   <!-- Replies Container -->
-                  <div class="flex-1 flex flex-col gap-y-1 overflow-hidden transition-all duration-300" 
+                  <div class="flex-1 flex flex-col gap-y-1 overflow-hidden transition-all duration-300 [&>button]:justify-center [&>button]:font-normal [&>button]:text-base-content/80 [&>button:hover]:text-base-content [&>button:hover]:bg-base-200/60" 
                        data-quick-replies-target="container"
                        style="max-height: 7.5rem;">
-                    <button class="btn btn-sm btn-ghost btn-block justify-center font-normal text-base-content/80 hover:text-base-content hover:bg-base-200/60">
+                    <button class="btn btn-sm btn-ghost btn-block">
                       继续
                     </button>
-                    <button class="btn btn-sm btn-ghost btn-block justify-center font-normal text-base-content/80 hover:text-base-content hover:bg-base-200/60">
+                    <button class="btn btn-sm btn-ghost btn-block">
                       这真是个有趣的故事，能告诉我更多细节吗？
                     </button>
-                    <button class="btn btn-sm btn-ghost btn-block justify-center font-normal text-base-content/80 hover:text-base-content hover:bg-base-200/60">
+                    <button class="btn btn-sm btn-ghost btn-block">
                       *环顾四周，试图找到那块神秘的水晶*
                     </button>
-                    <button class="btn btn-sm btn-ghost btn-block justify-center font-normal text-base-content/80 hover:text-base-content hover:bg-base-200/60 hidden" data-quick-replies-target="extra">
+                    <button class="btn btn-sm btn-ghost btn-block hidden" data-quick-replies-target="extra">
                       塞拉斯现在在哪里？
                     </button>
-                    <button class="btn btn-sm btn-ghost btn-block justify-center font-normal text-base-content/80 hover:text-base-content hover:bg-base-200/60 hidden" data-quick-replies-target="extra">
+                    <button class="btn btn-sm btn-ghost btn-block hidden" data-quick-replies-target="extra">
                       我想点一杯酒，这里有什么推荐的吗？
                     </button>
-                    <button class="btn btn-sm btn-ghost btn-block justify-center font-normal text-base-content/80 hover:text-base-content hover:bg-base-200/60 hidden" data-quick-replies-target="extra">
+                    <button class="btn btn-sm btn-ghost btn-block hidden" data-quick-replies-target="extra">
                       *从背包里掏出一本古老的日记* 你看看这个，有没有见过类似的符文？
                     </button>
                   </div>
