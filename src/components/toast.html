@@ -20,17 +20,13 @@
              data-toast-pause-on-hover-value="true">
             <div class="toast toast-top toast-end z-50">
                     <div class="alert alert-success shadow-lg relative overflow-hidden!" data-toast-target="alert">
-                            <svg xmlns="http://www.w3.org/2000/svg" class="size-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                            </svg>
+                            <span class="icon-[lucide--circle-check] size-6 shrink-0"></span>
                             <div class="flex flex-col gap-1">
                                 <span class="font-semibold">登录成功！</span>
                                 <span class="text-xs opacity-80">欢迎回来，用户</span>
                             </div>
                             <button type="button" data-action="toast#dismiss" class="btn btn-ghost btn-sm btn-circle">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                </svg>
+                                <span class="icon-[lucide--x] size-4"></span>
                             </button>
                             <!-- Progress bar -->
                             <div class="absolute bottom-0 inset-x-0 h-1 bg-success/30 rounded-b-box">
@@ -215,20 +211,12 @@
     <script type="module" src="../js/application.js"></script>
     
     <script>
-        // Icon SVGs for different alert types
+        // Icon classes for different alert types
         const icons = {
-            success: `<svg xmlns="http://www.w3.org/2000/svg" class="size-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>`,
-            info: `<svg xmlns="http://www.w3.org/2000/svg" class="size-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>`,
-            warning: `<svg xmlns="http://www.w3.org/2000/svg" class="size-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-            </svg>`,
-            error: `<svg xmlns="http://www.w3.org/2000/svg" class="size-6 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-            </svg>`
+            success: `<span class="icon-[lucide--circle-check] size-6 shrink-0"></span>`,
+            info: `<span class="icon-[lucide--info] size-6 shrink-0"></span>`,
+            warning: `<span class="icon-[lucide--triangle-alert] size-6 shrink-0"></span>`,
+            error: `<span class="icon-[lucide--circle-x] size-6 shrink-0"></span>`
         };
 
         function showToast(type, title, message) {
@@ -283,9 +271,7 @@
                                 <span class="text-xs opacity-80">${message}</span>
                             </div>
                             <button type="button" data-action="toast#dismiss" class="btn btn-ghost btn-sm btn-circle">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
-                                </svg>
+                                <span class="icon-[lucide--x] size-4"></span>
                             </button>
                             ${progressHTML}
                         </div>
@@ -299,4 +285,5 @@
 </body>
 
 </html>
+
 

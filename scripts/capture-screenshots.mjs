@@ -80,3 +80,4 @@ async function captureScreenshots() {
 }
 
 captureScreenshots().catch(console.error);
+

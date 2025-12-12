@@ -5,6 +5,14 @@
 /* 核心插件 */
 @plugin "daisyui";
 
+/* 图标支持 - 使用 Lucide 图标集 */
+@plugin "@iconify/tailwind4" {
+  prefixes: lucide;
+}
+
+/* 动画支持 */
+@plugin "tailwindcss-motion";
+
 /* 深色主题：Celestia Tavern Night */
 @plugin "daisyui/theme" {
   name: "celestia-night";
