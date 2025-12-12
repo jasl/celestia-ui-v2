@@ -2,18 +2,15 @@
 
 @import "tailwindcss";
 
-/* 核心插件 */
 @plugin "daisyui";
 
-/* 图标支持 - 使用 Lucide 图标集 */
 @plugin "@iconify/tailwind4" {
   prefixes: lucide;
 }
 
-/* 动画支持 */
 @plugin "tailwindcss-motion";
 
-/* 深色主题：Celestia Tavern Night */
+/* Dark theme: Celestia Tavern Night */
 @plugin "daisyui/theme" {
   name: "celestia-night";
   default: false;
@@ -60,10 +57,10 @@
   --noise: 1;
 }
 
-/* 浅色主题：Celestia Dawn */
+/* Light theme: Celestia Dawn */
 @plugin "daisyui/theme" {
   name: "celestia-dawn";
-  default: true;       /* 默认使用浅色 */
+  default: true;       /* Use light as default */
   prefersdark: false;
   color-scheme: light;
 
