@@ -35,15 +35,29 @@
     <link rel="stylesheet" href="../assets/application.css">
 </head>
 
-<body class="min-h-screen bg-base-200 p-8">
+<body class="min-h-screen bg-base-200">
+    <!-- Demo Navbar - 用于测试 Toast 在有 Navbar 时的位置 -->
+    <header class="navbar h-14 min-h-14 px-4 bg-base-100 border-b border-base-300/40 sticky top-0 z-40">
+        <div class="navbar-start">
+            <span class="font-semibold">测试 Navbar</span>
+        </div>
+        <div class="navbar-center">
+            <span class="text-sm opacity-70">Toast 应该出现在 Navbar 下方</span>
+        </div>
+        <div class="navbar-end">
+            <button class="btn btn-sm btn-ghost">按钮</button>
+        </div>
+    </header>
+
     <!-- Toast Container - Server rendered toasts will be placed here -->
     <div id="toast-container">
         <!-- Example: Server-side rendered toast (will show on page load) -->
+        <!-- 方案: 使用 top-[calc(var(--spacing-4)+3.5rem)] 来偏移 navbar 高度 -->
         <div data-controller="toast" 
              data-toast-duration-value="5000"
              data-toast-auto-dismiss-value="true"
              data-toast-pause-on-hover-value="true">
-            <div class="toast toast-top toast-end z-50">
+            <div class="toast toast-top toast-end z-50 top-[4.5rem]!">
                     <div class="alert alert-success shadow-xl relative overflow-hidden" data-toast-target="alert">
                             <span class="icon-[lucide--circle-check] size-6 shrink-0"></span>
                             <div class="flex flex-col gap-1">
@@ -146,13 +160,14 @@
                     <pre data-prefix="2"><code>&lt;div data-controller="toast"</code></pre>
                     <pre data-prefix="3"><code>     data-toast-duration-value="5000"</code></pre>
                     <pre data-prefix="4"><code>     data-toast-auto-dismiss-value="true"&gt;</code></pre>
-                    <pre data-prefix="5"><code>  &lt;div class="toast toast-top toast-end z-50"&gt;</code></pre>
-                    <pre data-prefix="6"><code>    &lt;div class="alert alert-success"&gt;</code></pre>
-                    <pre data-prefix="7"><code>      &lt;span&gt;{{ message }}&lt;/span&gt;</code></pre>
-                    <pre data-prefix="8"><code>      &lt;button data-action="toast#dismiss"&gt;✕&lt;/button&gt;</code></pre>
-                    <pre data-prefix="9"><code>    &lt;/div&gt;</code></pre>
-                    <pre data-prefix="10"><code>  &lt;/div&gt;</code></pre>
-                    <pre data-prefix="11"><code>&lt;/div&gt;</code></pre>
+                    <pre data-prefix="5"><code>  &lt;!-- 如有 Navbar，添加 top-[4.5rem]! 避免被遮挡 --&gt;</code></pre>
+                    <pre data-prefix="6"><code>  &lt;div class="toast toast-top toast-end z-50 top-[4.5rem]!"&gt;</code></pre>
+                    <pre data-prefix="7"><code>    &lt;div class="alert alert-success"&gt;</code></pre>
+                    <pre data-prefix="8"><code>      &lt;span&gt;{{ message }}&lt;/span&gt;</code></pre>
+                    <pre data-prefix="9"><code>      &lt;button data-action="toast#dismiss"&gt;✕&lt;/button&gt;</code></pre>
+                    <pre data-prefix="10"><code>    &lt;/div&gt;</code></pre>
+                    <pre data-prefix="11"><code>  &lt;/div&gt;</code></pre>
+                    <pre data-prefix="12"><code>&lt;/div&gt;</code></pre>
                 </div>
 
                 <!-- API Reference -->
@@ -228,6 +243,70 @@
                         </tbody>
                     </table>
                 </div>
+
+                <!-- Navbar Offset 说明 -->
+                <div class="divider">避开 Navbar 遮挡</div>
+                
+                <div class="alert alert-info">
+                    <span class="icon-[lucide--info] size-5 shrink-0"></span>
+                    <div>
+                        <p class="font-semibold">问题</p>
+                        <p class="text-sm opacity-80">当页面有固定的 Navbar 时，使用 <code>toast-top</code> 的 Toast 可能会被 Navbar 遮挡。</p>
+                    </div>
+                </div>
+
+                <div class="mt-4">
+                    <p class="font-semibold mb-2">解决方案</p>
+                    <p class="text-base-content/70 mb-4">
+                        在 <code>.toast</code> 元素上添加 <code class="text-primary">top-[4.5rem]!</code> 类来偏移 Toast 的位置，使其出现在 Navbar 下方。
+                    </p>
+                    <ul class="list-disc list-inside text-base-content/70 space-y-1 mb-4">
+                        <li>使用 <strong>任意值语法</strong> <code>top-[值]</code>，因为 Tailwind 默认间距刻度从 16 跳到 20，没有 18</li>
+                        <li><code>top-[4.5rem]</code> = 72px，适用于 <code>h-14</code> (56px) 高度的 Navbar</li>
+                        <li>末尾的 <code>!</code> 是 Tailwind CSS 的 important 修饰符，用于覆盖 daisyUI 的默认样式</li>
+                    </ul>
+                </div>
+
+                <div class="mockup-code text-sm">
+                    <pre data-prefix="1"><code>&lt;!-- 有 Navbar 时的 Toast 用法 --&gt;</code></pre>
+                    <pre data-prefix="2"><code>&lt;div class="toast toast-top toast-end z-50 <span class="text-success">top-[4.5rem]!</span>"&gt;</code></pre>
+                    <pre data-prefix="3"><code>  &lt;div class="alert alert-success"&gt;</code></pre>
+                    <pre data-prefix="4"><code>    &lt;span&gt;消息内容&lt;/span&gt;</code></pre>
+                    <pre data-prefix="5"><code>  &lt;/div&gt;</code></pre>
+                    <pre data-prefix="6"><code>&lt;/div&gt;</code></pre>
+                </div>
+
+                <div class="mt-4">
+                    <p class="font-semibold mb-2">常用偏移值对照</p>
+                    <div class="overflow-x-auto">
+                        <table class="table table-zebra table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Navbar 高度</th>
+                                    <th>推荐偏移类</th>
+                                    <th>实际值</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>h-12</code> (48px)</td>
+                                    <td><code class="text-primary">top-16!</code></td>
+                                    <td>4rem (64px)</td>
+                                </tr>
+                                <tr>
+                                    <td><code>h-14</code> (56px)</td>
+                                    <td><code class="text-primary">top-[4.5rem]!</code></td>
+                                    <td>4.5rem (72px)</td>
+                                </tr>
+                                <tr>
+                                    <td><code>h-16</code> (64px)</td>
+                                    <td><code class="text-primary">top-20!</code></td>
+                                    <td>5rem (80px)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -283,12 +362,15 @@
                 </div>
             ` : '';
             
+            // 如果是 toast-top，添加 top-[4.5rem]! 来避开 navbar（使用 ! 强制覆盖 daisyUI 默认样式）
+            const topOffset = position.includes('toast-top') ? 'top-[4.5rem]!' : '';
+            
             const toastHTML = `
                 <div data-controller="toast" 
                      data-toast-duration-value="${duration}"
                      data-toast-auto-dismiss-value="${autoDismiss}"
                      data-toast-pause-on-hover-value="${pauseOnHover}">
-                    <div class="toast ${position} z-50">
+                    <div class="toast ${position} z-50 ${topOffset}">
                         <div class="alert ${colors.alert} shadow-xl relative overflow-hidden" data-toast-target="alert">
                             ${icons[type]}
                             <div class="flex flex-col gap-1">

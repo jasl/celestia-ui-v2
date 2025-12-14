@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>表单错误示例</title>
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="stylesheet" href="../assets/application.css">
+  <script type="module" src="../js/application.js"></script>
+</head>
+
+<body class="min-h-dvh bg-base-100 p-8">
+  <div class="max-w-2xl mx-auto space-y-12">
+    <h1 class="text-3xl font-bold">表单错误显示示例</h1>
+
+    <!-- 方案 1: 使用 label 类显示后端错误（推荐） -->
+    <section class="space-y-4">
+      <h2 class="text-xl font-semibold">方案 1: 使用 label 类（推荐用于后端验证）</h2>
+      <p class="text-base-content/70">使用 <code class="kbd kbd-sm">label</code> 类配合颜色类来显示后端返回的错误信息。</p>
+
+      <div class="card bg-base-200 p-6">
+        <form class="space-y-4">
+          <!-- 有错误的字段 -->
+          <fieldset class="fieldset">
+            <legend class="fieldset-legend text-sm">邮箱地址</legend>
+            <label class="input input-error flex items-center gap-3 w-full">
+              <span class="icon-[lucide--mail] size-4 opacity-50"></span>
+              <input type="email" class="grow" placeholder="you@example.com" value="jasl9187@hotmail.com">
+            </label>
+            <p class="label text-error">该邮箱已被注册</p>
+          </fieldset>
+
+          <!-- 没有错误的字段 -->
+          <fieldset class="fieldset">
+            <legend class="fieldset-legend text-sm">用户名</legend>
+            <label class="input flex items-center gap-3 w-full">
+              <span class="icon-[lucide--user] size-4 opacity-50"></span>
+              <input type="text" class="grow" placeholder="请输入用户名" value="john_doe">
+            </label>
+          </fieldset>
+
+          <button type="submit" class="btn btn-primary">提交</button>
+        </form>
+      </div>
+
+      <div class="mockup-code text-sm">
+        <pre data-prefix=""><code>&lt;fieldset class="fieldset"&gt;</code></pre>
+        <pre data-prefix=""><code>  &lt;legend class="fieldset-legend text-sm"&gt;邮箱地址&lt;/legend&gt;</code></pre>
+        <pre data-prefix=""><code>  &lt;label class="input input-error flex items-center gap-3 w-full"&gt;</code></pre>
+        <pre data-prefix=""><code>    &lt;input type="email" ...&gt;</code></pre>
+        <pre data-prefix=""><code>  &lt;/label&gt;</code></pre>
+        <pre data-prefix="" class="bg-warning/20 text-warning"><code>  &lt;p class="label text-error"&gt;该邮箱已被注册&lt;/p&gt;</code></pre>
+        <pre data-prefix=""><code>&lt;/fieldset&gt;</code></pre>
+      </div>
+    </section>
+
+    <!-- 方案 2: 使用 alert 组件显示多个错误 -->
+    <section class="space-y-4">
+      <h2 class="text-xl font-semibold">方案 2: 使用 alert 组件显示多个错误</h2>
+      <p class="text-base-content/70">适合在表单顶部显示所有错误的汇总。</p>
+
+      <div class="card bg-base-200 p-6">
+        <form class="space-y-4">
+          <!-- 错误汇总 -->
+          <div role="alert" class="alert alert-error alert-soft">
+            <span class="icon-[lucide--circle-alert] size-5"></span>
+            <div>
+              <h3 class="font-bold">表单提交失败</h3>
+              <ul class="text-sm list-disc list-inside mt-1">
+                <li>邮箱地址已被注册</li>
+                <li>密码需要至少 8 个字符</li>
+              </ul>
+            </div>
+          </div>
+
+          <fieldset class="fieldset">
+            <legend class="fieldset-legend text-sm">邮箱地址</legend>
+            <label class="input input-error flex items-center gap-3 w-full">
+              <span class="icon-[lucide--mail] size-4 opacity-50"></span>
+              <input type="email" class="grow" placeholder="you@example.com" value="jasl9187@hotmail.com">
+            </label>
+          </fieldset>
+
+          <fieldset class="fieldset">
+            <legend class="fieldset-legend text-sm">密码</legend>
+            <label class="input input-error flex items-center gap-3 w-full">
+              <span class="icon-[lucide--lock] size-4 opacity-50"></span>
+              <input type="password" class="grow" placeholder="请输入密码" value="123">
+            </label>
+          </fieldset>
+
+          <button type="submit" class="btn btn-primary">提交</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- 方案 3: validator-hint 的正确用法（前端验证） -->
+    <section class="space-y-4">
+      <h2 class="text-xl font-semibold">方案 3: validator-hint（仅适用于前端 HTML5 验证）</h2>
+      <p class="text-base-content/70">
+        <code class="kbd kbd-sm">validator-hint</code> 基于 HTML5 表单验证，使用 CSS <code class="kbd kbd-sm">:invalid</code> 伪类。
+        只有当输入不满足 HTML5 验证规则时才会显示。
+      </p>
+
+      <div class="card bg-base-200 p-6">
+        <form class="space-y-4">
+          <!-- 清空输入框或输入无效 email 格式才会显示 hint -->
+          <fieldset class="fieldset">
+            <legend class="fieldset-legend text-sm">邮箱地址（清空或输入无效格式试试）</legend>
+            <input type="email" class="input validator w-full" placeholder="you@example.com" required>
+            <p class="validator-hint">请输入有效的邮箱地址</p>
+          </fieldset>
+
+          <fieldset class="fieldset">
+            <legend class="fieldset-legend text-sm">密码（需要至少 8 个字符）</legend>
+            <input type="password" class="input validator w-full" placeholder="请输入密码" required minlength="8">
+            <p class="validator-hint">密码需要至少 8 个字符</p>
+          </fieldset>
+
+          <button type="submit" class="btn btn-primary">提交</button>
+        </form>
+      </div>
+
+      <div class="alert alert-warning alert-soft">
+        <span class="icon-[lucide--triangle-alert] size-5"></span>
+        <div>
+          <p><strong>注意：</strong><code class="kbd kbd-sm">validator-hint</code> 不适合显示后端验证错误！</p>
+          <p class="text-sm">因为它依赖 HTML5 验证状态，而后端错误（如"邮箱已被注册"）无法通过 HTML5 验证来检测。</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 方案 4: 结合前端和后端验证 -->
+    <section class="space-y-4">
+      <h2 class="text-xl font-semibold">方案 4: 结合前端和后端验证（最佳实践）</h2>
+      <p class="text-base-content/70">前端验证用 <code class="kbd kbd-sm">validator</code>，后端错误用 <code class="kbd kbd-sm">label text-error</code>。</p>
+
+      <div class="card bg-base-200 p-6">
+        <form class="space-y-4">
+          <!-- 后端错误 + 前端验证 -->
+          <fieldset class="fieldset">
+            <legend class="fieldset-legend text-sm">邮箱地址</legend>
+            <input type="email" class="input validator input-error w-full" placeholder="you@example.com" value="jasl9187@hotmail.com" required>
+            <!-- 前端验证提示 -->
+            <p class="validator-hint">请输入有效的邮箱地址</p>
+            <!-- 后端错误提示（只在有后端错误时渲染） -->
+            <p class="label text-error">该邮箱已被注册</p>
+          </fieldset>
+
+          <fieldset class="fieldset">
+            <legend class="fieldset-legend text-sm">用户名</legend>
+            <input type="text" class="input validator w-full" placeholder="请输入用户名" required minlength="3" maxlength="20" pattern="[a-zA-Z0-9_]+">
+            <p class="validator-hint">用户名需要 3-20 个字符，只能包含字母、数字和下划线</p>
+          </fieldset>
+
+          <button type="submit" class="btn btn-primary">提交</button>
+        </form>
+      </div>
+
+      <div class="mockup-code text-sm">
+        <pre data-prefix=""><code>&lt;fieldset class="fieldset"&gt;</code></pre>
+        <pre data-prefix=""><code>  &lt;legend class="fieldset-legend text-sm"&gt;邮箱地址&lt;/legend&gt;</code></pre>
+        <pre data-prefix="" class="bg-info/20 text-info"><code>  &lt;!-- input-error 用于标记后端错误 --&gt;</code></pre>
+        <pre data-prefix=""><code>  &lt;input type="email" class="input validator input-error w-full" required&gt;</code></pre>
+        <pre data-prefix="" class="bg-info/20 text-info"><code>  &lt;!-- 前端验证提示（基于 HTML5 验证） --&gt;</code></pre>
+        <pre data-prefix=""><code>  &lt;p class="validator-hint"&gt;请输入有效的邮箱地址&lt;/p&gt;</code></pre>
+        <pre data-prefix="" class="bg-warning/20 text-warning"><code>  &lt;!-- 后端错误（只在有后端错误时由服务端渲染） --&gt;</code></pre>
+        <pre data-prefix="" class="bg-warning/20 text-warning"><code>  &lt;p class="label text-error"&gt;该邮箱已被注册&lt;/p&gt;</code></pre>
+        <pre data-prefix=""><code>&lt;/fieldset&gt;</code></pre>
+      </div>
+    </section>
+
+    <!-- 模板示例 -->
+    <section class="space-y-4">
+      <h2 class="text-xl font-semibold">Jinja2 / ERB 模板示例</h2>
+
+      <div class="mockup-code text-sm">
+        <pre data-prefix=""><code>&lt;!-- Jinja2 示例 --&gt;</code></pre>
+        <pre data-prefix=""><code>&lt;fieldset class="fieldset"&gt;</code></pre>
+        <pre data-prefix=""><code>  &lt;legend class="fieldset-legend text-sm"&gt;邮箱地址&lt;/legend&gt;</code></pre>
+        <pre data-prefix=""><code>  &lt;input type="email"</code></pre>
+        <pre data-prefix=""><code>    class="input w-full {% if errors.email %}input-error{% endif %}"</code></pre>
+        <pre data-prefix=""><code>    value="{{ form.email }}"</code></pre>
+        <pre data-prefix=""><code>    required&gt;</code></pre>
+        <pre data-prefix=""><code>  {% if errors.email %}</code></pre>
+        <pre data-prefix="" class="bg-warning/20 text-warning"><code>  &lt;p class="label text-error"&gt;{{ errors.email }}&lt;/p&gt;</code></pre>
+        <pre data-prefix=""><code>  {% endif %}</code></pre>
+        <pre data-prefix=""><code>&lt;/fieldset&gt;</code></pre>
+      </div>
+
+      <div class="mockup-code text-sm">
+        <pre data-prefix=""><code>&lt;!-- ERB (Ruby on Rails) 示例 --&gt;</code></pre>
+        <pre data-prefix=""><code>&lt;fieldset class="fieldset"&gt;</code></pre>
+        <pre data-prefix=""><code>  &lt;legend class="fieldset-legend text-sm"&gt;邮箱地址&lt;/legend&gt;</code></pre>
+        <pre data-prefix=""><code>  &lt;%= f.email_field :email,</code></pre>
+        <pre data-prefix=""><code>    class: "input w-full #{@user.errors[:email].any? ? 'input-error' : ''}" %&gt;</code></pre>
+        <pre data-prefix=""><code>  &lt;% if @user.errors[:email].any? %&gt;</code></pre>
+        <pre data-prefix="" class="bg-warning/20 text-warning"><code>  &lt;p class="label text-error"&gt;&lt;%= @user.errors[:email].first %&gt;&lt;/p&gt;</code></pre>
+        <pre data-prefix=""><code>  &lt;% end %&gt;</code></pre>
+        <pre data-prefix=""><code>&lt;/fieldset&gt;</code></pre>
+      </div>
+    </section>
+
+  </div>
+</body>
+
+</html>
