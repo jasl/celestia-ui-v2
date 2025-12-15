@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <script>
+    (() => {
+      const light = "celestia-dawn"
+      const dark = "celestia-night"
+
+      const prefersDark = () => {
+        try {
+          return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches
+        } catch (e) {
+          return false
+        }
+      }
+
+      let theme = light
+      try {
+        const stored = localStorage.getItem("theme")
+        theme = stored === dark || stored === light ? stored : prefersDark() ? dark : light
+      } catch (e) {
+        theme = prefersDark() ? dark : light
+      }
+
+      document.documentElement.setAttribute("data-theme", theme)
+      document.documentElement.style.colorScheme = theme === dark ? "dark" : "light"
+    })()
+  </script>
+  <title>用户设置 - Celestia</title>
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="stylesheet" href="./assets/application.css">
+  <script type="module" src="./js/application.js"></script>
+</head>
+
+<body class="min-h-dvh bg-base-100">
+  <!-- Background gradient overlay -->
+  <div class="fixed inset-0 bg-linear-to-br from-primary/10 via-secondary/5 to-accent/10 pointer-events-none"></div>
+
+  <!-- Top Navigation -->
+  <nav class="navbar sticky top-0 z-50 h-14 px-4 md:px-8 bg-base-100/80 backdrop-blur-md border-b border-base-300/40">
+    <div class="navbar-start">
+      <a href="/" class="flex items-center gap-2">
+        <img src="/logo.png" alt="Celestia" class="w-8 h-8 rounded-lg">
+        <span class="font-semibold text-lg hidden sm:inline">Celestia</span>
+      </a>
+    </div>
+
+    <div class="navbar-center">
+      <h1 class="text-sm font-medium">用户设置</h1>
+    </div>
+
+    <div class="navbar-end gap-2">
+      <!-- Theme Toggle -->
+      <label class="swap swap-rotate btn btn-ghost btn-sm btn-circle" data-controller="theme">
+        <input type="checkbox" class="theme-controller" value="celestia-night" 
+               data-theme-target="checkbox" data-action="change->theme#toggle">
+        <span class="icon-[lucide--sun] swap-off size-5"></span>
+        <span class="icon-[lucide--moon] swap-on size-5"></span>
+      </label>
+
+      <!-- User avatar -->
+      <div class="avatar placeholder">
+        <div class="w-8 rounded-full bg-linear-to-tr from-primary to-secondary text-primary-content">
+          <span class="text-sm">U</span>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="relative max-w-6xl mx-auto px-4 md:px-8 py-6 md:py-8">
+    <!-- Mobile Navigation (visible on small screens) -->
+    <div class="md:hidden mb-6 overflow-x-auto">
+      <div class="tabs tabs-box inline-flex min-w-full">
+        <a href="#profile" class="tab tab-active whitespace-nowrap">个人资料</a>
+        <a href="#security" class="tab whitespace-nowrap">账号安全</a>
+        <a href="#notifications" class="tab whitespace-nowrap">通知设置</a>
+        <a href="#appearance" class="tab whitespace-nowrap">外观偏好</a>
+        <a href="#privacy" class="tab whitespace-nowrap">隐私设置</a>
+        <a href="#connections" class="tab whitespace-nowrap">连接账号</a>
+      </div>
+    </div>
+
+    <!-- Two-column Layout -->
+    <div class="flex flex-col md:flex-row gap-6 md:gap-8">
+      <!-- Left Sidebar Navigation (hidden on mobile) -->
+      <aside class="hidden md:block w-64 shrink-0">
+        <div class="sticky top-20">
+          <ul class="menu bg-base-200/95 backdrop-blur-md rounded-box w-full p-3">
+            <li class="menu-title">账号</li>
+            <li>
+              <a href="#profile" class="gap-3 menu-active">
+                <span class="icon-[lucide--user] size-4"></span>
+                个人资料
+              </a>
+            </li>
+            <li>
+              <a href="#security" class="gap-3">
+                <span class="icon-[lucide--shield] size-4"></span>
+                账号安全
+              </a>
+            </li>
+            
+            <li class="menu-title mt-4">偏好设置</li>
+            <li>
+              <a href="#notifications" class="gap-3">
+                <span class="icon-[lucide--bell] size-4"></span>
+                通知设置
+              </a>
+            </li>
+            <li>
+              <a href="#appearance" class="gap-3">
+                <span class="icon-[lucide--palette] size-4"></span>
+                外观偏好
+              </a>
+            </li>
+            <li>
+              <a href="#privacy" class="gap-3">
+                <span class="icon-[lucide--eye-off] size-4"></span>
+                隐私设置
+              </a>
+            </li>
+            
+            <li class="menu-title mt-4">集成</li>
+            <li>
+              <a href="#connections" class="gap-3">
+                <span class="icon-[lucide--link] size-4"></span>
+                连接账号
+              </a>
+            </li>
+          </ul>
+
+          <!-- Danger Zone -->
+          <div class="mt-6">
+            <button class="btn btn-ghost btn-sm text-error w-full justify-start gap-3">
+              <span class="icon-[lucide--trash-2] size-4"></span>
+              删除账号
+            </button>
+          </div>
+        </div>
+      </aside>
+
+      <!-- Right Content Area -->
+      <div class="flex-1 min-w-0 flex flex-col gap-y-6">
+        
+        <!-- Profile Section -->
+        <section id="profile" class="card bg-base-200/60 backdrop-blur-xl border border-base-300/40">
+          <div class="card-body">
+            <h2 class="card-title text-lg mb-4">
+              <span class="icon-[lucide--user] size-5 opacity-60"></span>
+              个人资料
+            </h2>
+            
+            <!-- Avatar Upload -->
+            <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 mb-6">
+              <div class="avatar placeholder">
+                <div class="w-20 h-20 rounded-full bg-linear-to-tr from-primary to-secondary text-primary-content">
+                  <span class="text-2xl">U</span>
+                </div>
+              </div>
+              <div class="flex flex-col gap-2">
+                <div class="flex gap-2">
+                  <button class="btn btn-sm btn-primary">上传头像</button>
+                  <button class="btn btn-sm btn-ghost">删除</button>
+                </div>
+                <p class="text-xs text-base-content/60">支持 JPG、PNG、GIF，最大 2MB</p>
+              </div>
+            </div>
+
+            <div class="grid gap-4 sm:grid-cols-2">
+              <fieldset class="fieldset">
+                <legend class="fieldset-legend text-sm">显示名称</legend>
+                <input type="text" class="input w-full" value="旅行者" placeholder="你的昵称">
+              </fieldset>
+
+              <fieldset class="fieldset">
+                <legend class="fieldset-legend text-sm">用户名</legend>
+                <label class="input flex items-center gap-2 w-full">
+                  <span class="text-base-content/50">@</span>
+                  <input type="text" class="grow" value="storyteller" placeholder="用户名">
+                </label>
+              </fieldset>
+            </div>
+
+            <fieldset class="fieldset mt-2">
+              <legend class="fieldset-legend text-sm">邮箱地址</legend>
+              <label class="input flex items-center gap-3 w-full">
+                <span class="icon-[lucide--mail] size-4 opacity-50"></span>
+                <input type="email" class="grow" value="user@example.com" placeholder="your@email.com">
+                <span class="badge badge-success badge-sm">已验证</span>
+              </label>
+            </fieldset>
+
+            <fieldset class="fieldset mt-2">
+              <legend class="fieldset-legend text-sm">个人简介</legend>
+              <textarea class="textarea w-full" rows="3" placeholder="介绍一下你自己...">热爱幻想文学和角色扮演的冒险者。</textarea>
+              <p class="label text-xs">最多 200 字符</p>
+            </fieldset>
+
+            <div class="card-actions justify-end mt-4">
+              <button class="btn btn-ghost">取消</button>
+              <button class="btn btn-primary">保存更改</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Security Section -->
+        <section id="security" class="card bg-base-200/60 backdrop-blur-xl border border-base-300/40">
+          <div class="card-body">
+            <h2 class="card-title text-lg mb-4">
+              <span class="icon-[lucide--shield] size-5 opacity-60"></span>
+              账号安全
+            </h2>
+
+            <!-- Password -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 py-4 border-b border-base-300/40">
+              <div>
+                <h3 class="font-medium">密码</h3>
+                <p class="text-sm text-base-content/60">上次修改于 30 天前</p>
+              </div>
+              <button class="btn btn-sm btn-outline">修改密码</button>
+            </div>
+
+            <!-- Two-Factor Auth -->
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 py-4 border-b border-base-300/40">
+              <div>
+                <h3 class="font-medium">两步验证</h3>
+                <p class="text-sm text-base-content/60">使用身份验证器应用增强安全性</p>
+              </div>
+              <div class="flex items-center gap-3">
+                <span class="badge badge-ghost badge-sm">未启用</span>
+                <button class="btn btn-sm btn-primary">启用</button>
+              </div>
+            </div>
+
+            <!-- Active Sessions -->
+            <div class="py-4">
+              <div class="flex items-center justify-between mb-4">
+                <div>
+                  <h3 class="font-medium">登录设备</h3>
+                  <p class="text-sm text-base-content/60">管理已登录的设备</p>
+                </div>
+              </div>
+              
+              <div class="flex flex-col gap-3">
+                <!-- Current Device -->
+                <div class="flex items-center gap-4 p-3 rounded-box bg-base-300/30">
+                  <span class="icon-[lucide--laptop] size-8 opacity-60"></span>
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-center gap-2">
+                      <span class="font-medium text-sm">MacBook Pro</span>
+                      <span class="badge badge-success badge-xs">当前设备</span>
+                    </div>
+                    <p class="text-xs text-base-content/60">北京 · Chrome · 最近活跃</p>
+                  </div>
+                </div>
+                
+                <!-- Other Device -->
+                <div class="flex items-center gap-4 p-3 rounded-box bg-base-300/30">
+                  <span class="icon-[lucide--smartphone] size-8 opacity-60"></span>
+                  <div class="flex-1 min-w-0">
+                    <div class="font-medium text-sm">iPhone 15</div>
+                    <p class="text-xs text-base-content/60">上海 · Safari · 2 天前</p>
+                  </div>
+                  <button class="btn btn-ghost btn-xs text-error">移除</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Notifications Section -->
+        <section id="notifications" class="card bg-base-200/60 backdrop-blur-xl border border-base-300/40">
+          <div class="card-body">
+            <h2 class="card-title text-lg mb-4">
+              <span class="icon-[lucide--bell] size-5 opacity-60"></span>
+              通知设置
+            </h2>
+
+            <div class="flex flex-col gap-y-4">
+              <!-- Email Notifications -->
+              <div class="flex items-center justify-between py-2">
+                <div>
+                  <h3 class="font-medium text-sm">邮件通知</h3>
+                  <p class="text-xs text-base-content/60">接收重要更新和活动提醒</p>
+                </div>
+                <input type="checkbox" class="toggle toggle-primary" checked>
+              </div>
+
+              <!-- Push Notifications -->
+              <div class="flex items-center justify-between py-2">
+                <div>
+                  <h3 class="font-medium text-sm">推送通知</h3>
+                  <p class="text-xs text-base-content/60">在浏览器中接收实时通知</p>
+                </div>
+                <input type="checkbox" class="toggle toggle-primary">
+              </div>
+
+              <!-- Marketing Emails -->
+              <div class="flex items-center justify-between py-2">
+                <div>
+                  <h3 class="font-medium text-sm">营销邮件</h3>
+                  <p class="text-xs text-base-content/60">新功能和促销活动通知</p>
+                </div>
+                <input type="checkbox" class="toggle">
+              </div>
+
+              <div class="divider text-xs opacity-50">通知频率</div>
+
+              <fieldset class="fieldset">
+                <legend class="fieldset-legend text-sm">摘要邮件</legend>
+                <select class="select w-full">
+                  <option>实时通知</option>
+                  <option selected>每日摘要</option>
+                  <option>每周摘要</option>
+                  <option>从不</option>
+                </select>
+              </fieldset>
+            </div>
+          </div>
+        </section>
+
+        <!-- Appearance Section -->
+        <section id="appearance" class="card bg-base-200/60 backdrop-blur-xl border border-base-300/40">
+          <div class="card-body">
+            <h2 class="card-title text-lg mb-4">
+              <span class="icon-[lucide--palette] size-5 opacity-60"></span>
+              外观偏好
+            </h2>
+
+            <!-- Theme Selection -->
+            <div class="mb-6">
+              <h3 class="font-medium text-sm mb-3">主题</h3>
+              <div class="grid grid-cols-3 gap-3">
+                <label class="cursor-pointer">
+                  <input type="radio" name="theme" class="peer hidden" value="light">
+                  <div class="flex flex-col items-center gap-2 p-3 rounded-box border-2 border-base-300 peer-checked:border-primary transition-colors">
+                    <div class="w-full h-12 rounded-lg bg-linear-to-br from-slate-100 to-slate-200 flex items-center justify-center">
+                      <span class="icon-[lucide--sun] size-5 text-slate-600"></span>
+                    </div>
+                    <span class="text-xs font-medium">浅色</span>
+                  </div>
+                </label>
+                <label class="cursor-pointer">
+                  <input type="radio" name="theme" class="peer hidden" value="dark" checked>
+                  <div class="flex flex-col items-center gap-2 p-3 rounded-box border-2 border-base-300 peer-checked:border-primary transition-colors">
+                    <div class="w-full h-12 rounded-lg bg-linear-to-br from-slate-800 to-slate-900 flex items-center justify-center">
+                      <span class="icon-[lucide--moon] size-5 text-slate-300"></span>
+                    </div>
+                    <span class="text-xs font-medium">深色</span>
+                  </div>
+                </label>
+                <label class="cursor-pointer">
+                  <input type="radio" name="theme" class="peer hidden" value="system">
+                  <div class="flex flex-col items-center gap-2 p-3 rounded-box border-2 border-base-300 peer-checked:border-primary transition-colors">
+                    <div class="w-full h-12 rounded-lg bg-linear-to-r from-slate-100 to-slate-800 flex items-center justify-center">
+                      <span class="icon-[lucide--laptop] size-5 text-slate-500"></span>
+                    </div>
+                    <span class="text-xs font-medium">跟随系统</span>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <!-- Language -->
+            <fieldset class="fieldset">
+              <legend class="fieldset-legend text-sm">语言</legend>
+              <select class="select w-full">
+                <option selected>简体中文</option>
+                <option>繁體中文</option>
+                <option>English</option>
+                <option>日本語</option>
+              </select>
+            </fieldset>
+
+            <!-- Font Size -->
+            <div class="mt-4">
+              <div class="flex items-center justify-between mb-2">
+                <span class="text-sm font-medium">字体大小</span>
+                <span class="text-xs font-mono opacity-60">中</span>
+              </div>
+              <input type="range" min="0" max="4" value="2" class="range range-sm" step="1">
+              <div class="flex justify-between text-[10px] opacity-50 px-1 mt-1">
+                <span>小</span>
+                <span>中</span>
+                <span>大</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Privacy Section -->
+        <section id="privacy" class="card bg-base-200/60 backdrop-blur-xl border border-base-300/40">
+          <div class="card-body">
+            <h2 class="card-title text-lg mb-4">
+              <span class="icon-[lucide--eye-off] size-5 opacity-60"></span>
+              隐私设置
+            </h2>
+
+            <div class="flex flex-col gap-y-4">
+              <!-- Profile Visibility -->
+              <div class="flex items-center justify-between py-2">
+                <div>
+                  <h3 class="font-medium text-sm">公开个人资料</h3>
+                  <p class="text-xs text-base-content/60">允许其他用户查看你的资料页面</p>
+                </div>
+                <input type="checkbox" class="toggle toggle-primary" checked>
+              </div>
+
+              <!-- Activity Status -->
+              <div class="flex items-center justify-between py-2">
+                <div>
+                  <h3 class="font-medium text-sm">显示在线状态</h3>
+                  <p class="text-xs text-base-content/60">让他人知道你何时在线</p>
+                </div>
+                <input type="checkbox" class="toggle toggle-primary" checked>
+              </div>
+
+              <!-- Data Sharing -->
+              <div class="flex items-center justify-between py-2">
+                <div>
+                  <h3 class="font-medium text-sm">数据分析</h3>
+                  <p class="text-xs text-base-content/60">帮助我们改进产品体验</p>
+                </div>
+                <input type="checkbox" class="toggle">
+              </div>
+
+              <!-- Personalization -->
+              <div class="flex items-center justify-between py-2">
+                <div>
+                  <h3 class="font-medium text-sm">个性化推荐</h3>
+                  <p class="text-xs text-base-content/60">基于你的活动提供推荐内容</p>
+                </div>
+                <input type="checkbox" class="toggle toggle-primary" checked>
+              </div>
+            </div>
+
+            <div class="divider text-xs opacity-50">数据管理</div>
+
+            <div class="flex flex-wrap gap-3">
+              <button class="btn btn-sm btn-outline gap-2">
+                <span class="icon-[lucide--download] size-4"></span>
+                导出数据
+              </button>
+              <button class="btn btn-sm btn-ghost text-error gap-2">
+                <span class="icon-[lucide--trash-2] size-4"></span>
+                清除数据
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Connected Accounts Section -->
+        <section id="connections" class="card bg-base-200/60 backdrop-blur-xl border border-base-300/40">
+          <div class="card-body">
+            <h2 class="card-title text-lg mb-4">
+              <span class="icon-[lucide--link] size-5 opacity-60"></span>
+              连接账号
+            </h2>
+
+            <p class="text-sm text-base-content/60 mb-4">连接第三方服务以便快速登录或同步数据</p>
+
+            <div class="flex flex-col gap-y-3">
+              <!-- Google -->
+              <div class="flex items-center gap-4 p-4 rounded-box bg-base-300/30">
+                <span class="icon-[lucide--chrome] size-8 opacity-80"></span>
+                <div class="flex-1 min-w-0">
+                  <div class="font-medium text-sm">Google</div>
+                  <p class="text-xs text-base-content/60">user@gmail.com</p>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="badge badge-success badge-sm">已连接</span>
+                  <button class="btn btn-ghost btn-xs">断开</button>
+                </div>
+              </div>
+
+              <!-- GitHub -->
+              <div class="flex items-center gap-4 p-4 rounded-box bg-base-300/30">
+                <span class="icon-[lucide--github] size-8 opacity-80"></span>
+                <div class="flex-1 min-w-0">
+                  <div class="font-medium text-sm">GitHub</div>
+                  <p class="text-xs text-base-content/60">@storyteller</p>
+                </div>
+                <div class="flex items-center gap-2">
+                  <span class="badge badge-success badge-sm">已连接</span>
+                  <button class="btn btn-ghost btn-xs">断开</button>
+                </div>
+              </div>
+
+              <!-- Discord -->
+              <div class="flex items-center gap-4 p-4 rounded-box bg-base-300/30">
+                <span class="icon-[lucide--message-circle] size-8 opacity-60"></span>
+                <div class="flex-1 min-w-0">
+                  <div class="font-medium text-sm">Discord</div>
+                  <p class="text-xs text-base-content/60">用于社区通知和登录</p>
+                </div>
+                <button class="btn btn-sm btn-outline">连接</button>
+              </div>
+
+              <!-- Twitter/X -->
+              <div class="flex items-center gap-4 p-4 rounded-box bg-base-300/30">
+                <span class="icon-[lucide--twitter] size-8 opacity-60"></span>
+                <div class="flex-1 min-w-0">
+                  <div class="font-medium text-sm">Twitter / X</div>
+                  <p class="text-xs text-base-content/60">分享你的创作</p>
+                </div>
+                <button class="btn btn-sm btn-outline">连接</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Mobile: Delete Account Button -->
+        <div class="md:hidden">
+          <button class="btn btn-ghost text-error w-full justify-center gap-2">
+            <span class="icon-[lucide--trash-2] size-4"></span>
+            删除账号
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer footer-center p-6 bg-base-200/30 text-base-content border-t border-base-300/40 mt-8">
+    <aside>
+      <p class="text-xs text-base-content/60">
+        © 2024 Celestia. 以开源精神构建。
+      </p>
+    </aside>
+  </footer>
+</body>
+
+</html>
